@@ -6,7 +6,7 @@ const translations = {
     explore: "Explorar catálogo",
     catalogLink: "Conhecer nosso catálogo",
     regionalEyebrow: "Catálogo inaugural",
-    regionalTitle: "Três livros para começar",
+    regionalTitle: "Catálogo para começar",
     regionalNote: "Goiás · Brasília · Países periféricos",
     internationalTitle: "Edições internacionais",
     internationalNote: "França · Grécia · Argentina · Chile",
@@ -56,6 +56,7 @@ const translations = {
     eventWorldType: "Aula aberta e lançamento",
     eventComing: "Data e local serão divulgados em breve.",
     followUpdates: "Acompanhar novidades →",
+    filterAll: "Todas",
     headerRibbon: "CATÁLOGO 2024 · ENSAIO · LITERATURA · PENSAMENTO",
     artCaption: "Uma coleção de vozes<br />e territórios",
     topic1Title: "Centro do<br />Brasil",
@@ -94,6 +95,29 @@ const translations = {
     shippingQuoting: "Consultando frete…",
     shippingCombine: "Frete a combinar com a editora após a confirmação do pagamento.",
     shippingLabel: "Frete",
+    checkoutEyebrow: "Finalizar pedido",
+    checkoutTitle: "Dados de entrega",
+    checkoutGo: "Ir para o pagamento",
+    orderAwaiting: "Aguardando pagamento",
+    orderPaid: "Pago — em preparação",
+    orderPacking: "Em embalagem",
+    orderShipped: "Enviado",
+    orderDelivered: "Entregue",
+    orderCancelled: "Cancelado",
+    payPending: "Pagamento pendente",
+    payApproved: "Pagamento aprovado",
+    payRejected: "Pagamento recusado",
+    payRefunded: "Reembolsado",
+    orderTotal: "Total",
+    orderShipping: "Frete",
+    orderShippingTbd: "Frete: a combinar com a editora",
+    orderTracking: "Código de rastreio:",
+    orderIdLabel: "Pedido",
+    orderKeepLink: "— guarde este link para acompanhar.",
+    orderLoadError: "Não foi possível carregar o pedido agora. Tente novamente em instantes.",
+    orderNoData:
+      "Não encontramos os dados do seu pedido neste navegador. Use o link enviado na confirmação da compra.",
+    orderRefresh: "Atualizar status",
   },
   fr: {
     nav: ["Accueil", "Catalogue", "Événements", "À propos"],
@@ -103,7 +127,7 @@ const translations = {
     explore: "Explorer le catalogue",
     catalogLink: "Découvrir notre catalogue",
     regionalEyebrow: "Catalogue inaugural",
-    regionalTitle: "Trois livres pour commencer",
+    regionalTitle: "Un catalogue pour commencer",
     regionalNote: "Goiás · Brasília · Pays périphériques",
     internationalTitle: "Éditions internationales",
     internationalNote: "France · Grèce · Argentine · Chili",
@@ -153,6 +177,7 @@ const translations = {
     eventWorldType: "Cours ouvert et lancement",
     eventComing: "La date et le lieu seront annoncés prochainement.",
     followUpdates: "Suivre les nouveautés →",
+    filterAll: "Toutes",
     headerRibbon: "CATALOGUE 2024 · ESSAI · LITTÉRATURE · PENSÉE",
     artCaption: "Une collection de voix<br />et de territoires",
     topic1Title: "Centre du<br />Brésil",
@@ -192,6 +217,29 @@ const translations = {
     shippingQuoting: "Calcul des frais d’envoi…",
     shippingCombine: "Frais d’envoi à définir avec l’éditeur après la confirmation du paiement.",
     shippingLabel: "Livraison",
+    checkoutEyebrow: "Finaliser la commande",
+    checkoutTitle: "Informations de livraison",
+    checkoutGo: "Passer au paiement",
+    orderAwaiting: "En attente de paiement",
+    orderPaid: "Payé — en préparation",
+    orderPacking: "En cours d’emballage",
+    orderShipped: "Expédié",
+    orderDelivered: "Livré",
+    orderCancelled: "Annulé",
+    payPending: "Paiement en attente",
+    payApproved: "Paiement approuvé",
+    payRejected: "Paiement refusé",
+    payRefunded: "Remboursé",
+    orderTotal: "Total",
+    orderShipping: "Livraison",
+    orderShippingTbd: "Livraison : à définir avec l’éditeur",
+    orderTracking: "Numéro de suivi :",
+    orderIdLabel: "Commande",
+    orderKeepLink: "— conservez ce lien pour suivre votre commande.",
+    orderLoadError: "Impossible de charger la commande pour le moment. Réessayez dans un instant.",
+    orderNoData:
+      "Nous n’avons pas trouvé les données de votre commande dans ce navigateur. Utilisez le lien envoyé lors de la confirmation.",
+    orderRefresh: "Actualiser le statut",
   },
   es: {
     nav: ["Inicio", "Catálogo", "Eventos", "Sobre nosotros"],
@@ -201,7 +249,7 @@ const translations = {
     explore: "Explorar catálogo",
     catalogLink: "Conocer nuestro catálogo",
     regionalEyebrow: "Catálogo inaugural",
-    regionalTitle: "Tres libros para comenzar",
+    regionalTitle: "Un catálogo para empezar",
     regionalNote: "Goiás · Brasilia · Países periféricos",
     internationalTitle: "Ediciones internacionales",
     internationalNote: "Francia · Grecia · Argentina · Chile",
@@ -251,6 +299,7 @@ const translations = {
     eventWorldType: "Clase abierta y lanzamiento",
     eventComing: "La fecha y el lugar se anunciarán próximamente.",
     followUpdates: "Seguir las novedades →",
+    filterAll: "Todas",
     headerRibbon: "CATÁLOGO 2024 · ENSAYO · LITERATURA · PENSAMIENTO",
     artCaption: "Una colección de voces<br />y territorios",
     topic1Title: "Centro de<br />Brasil",
@@ -289,6 +338,29 @@ const translations = {
     shippingQuoting: "Calculando el envío…",
     shippingCombine: "Envío a convenir con la editorial tras la confirmación del pago.",
     shippingLabel: "Envío",
+    checkoutEyebrow: "Finalizar pedido",
+    checkoutTitle: "Datos de entrega",
+    checkoutGo: "Ir al pago",
+    orderAwaiting: "Esperando pago",
+    orderPaid: "Pagado — en preparación",
+    orderPacking: "En empaque",
+    orderShipped: "Enviado",
+    orderDelivered: "Entregado",
+    orderCancelled: "Cancelado",
+    payPending: "Pago pendiente",
+    payApproved: "Pago aprobado",
+    payRejected: "Pago rechazado",
+    payRefunded: "Reembolsado",
+    orderTotal: "Total",
+    orderShipping: "Envío",
+    orderShippingTbd: "Envío: a convenir con la editorial",
+    orderTracking: "Código de seguimiento:",
+    orderIdLabel: "Pedido",
+    orderKeepLink: "— guarda este enlace para hacer seguimiento.",
+    orderLoadError: "No se pudo cargar el pedido ahora. Inténtalo de nuevo en unos momentos.",
+    orderNoData:
+      "No encontramos los datos de tu pedido en este navegador. Usa el enlace enviado en la confirmación de la compra.",
+    orderRefresh: "Actualizar estado",
   },
 };
 window.uiTranslations = translations;
@@ -504,11 +576,17 @@ function setLanguage(language) {
   document
     .querySelectorAll(".language-button")
     .forEach((button) => button.classList.toggle("active", button.dataset.language === language));
+  // Passada genérica: qualquer elemento com data-i18n recebe a tradução (cobre chaves novas).
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = t[element.dataset.i18n];
+    if (value) element.textContent = value;
+  });
   document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
     const value = t[element.dataset.i18nPlaceholder];
     if (value) element.placeholder = value;
   });
   localStorage.setItem("nascente-language", language);
+  window.dispatchEvent(new CustomEvent("nascente:language", { detail: { language } }));
 }
 
 document.querySelectorAll(".language-button").forEach((button) => {

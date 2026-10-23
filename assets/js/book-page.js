@@ -62,6 +62,7 @@ async function loadRemoteBook() {
           title: remote.title,
           category: remote.category,
           description: remote.description || book.description,
+          context: remote.context || book.context || "",
           price: remote.priceCents / 100,
           coverKind: remote.coverKind ?? null,
         });
@@ -73,6 +74,7 @@ async function loadRemoteBook() {
       document.querySelector("#detail-category").textContent = book.category;
       document.querySelector("#detail-description").textContent = book.description;
       document.querySelector("#detail-price").textContent = money(book.price);
+      document.querySelector(".creation-context")?.toggleAttribute("hidden", !book.context);
       return;
     } catch {
       // origem indisponível: tenta a próxima
@@ -102,6 +104,7 @@ document.querySelector("#detail-category").textContent = book.category;
 document.querySelector("#detail-title").textContent = book.title;
 document.querySelector("#detail-description").textContent = book.description;
 document.querySelector("#detail-context").textContent = book.context;
+document.querySelector(".creation-context")?.toggleAttribute("hidden", !book.context);
 document.querySelector("#detail-price").textContent = money(book.price);
 
 document.querySelector("#detail-add").addEventListener("click", () => {

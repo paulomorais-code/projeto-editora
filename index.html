@@ -64,7 +64,7 @@
 
       <section class="section catalog-section" id="catalogo">
         <div class="section-heading">
-          <div><p class="eyebrow">Catálogo inaugural</p><h2>Três livros para começar</h2></div>
+          <div><p class="eyebrow">Catálogo inaugural</p><h2>Catálogo para começar</h2></div>
           <span class="catalog-note">Goiás · Brasília · Países periféricos</span>
         </div>
         <div class="book-grid">
@@ -130,7 +130,7 @@
     <div class="checkout-modal" aria-hidden="true">
       <form class="checkout-form">
         <button type="button" class="close-button" data-close-checkout aria-label="Fechar checkout">×</button>
-        <p class="eyebrow">Finalizar pedido</p><h2>Dados de entrega</h2>
+        <p class="eyebrow" data-i18n="checkoutEyebrow">Finalizar pedido</p><h2 data-i18n="checkoutTitle">Dados de entrega</h2>
         <input name="email" type="email" placeholder="E-mail" required maxlength="254" data-i18n-placeholder="phEmail">
         <input name="name" placeholder="Nome completo" required maxlength="120" data-i18n-placeholder="phName">
         <div class="checkout-row"><input name="postalCode" placeholder="CEP" required pattern="\d{5}-?\d{3}" data-i18n-placeholder="phPostal"><input name="number" placeholder="Número" required maxlength="20" data-i18n-placeholder="phNumber"></div>
@@ -139,7 +139,7 @@
         <input name="state" placeholder="UF" required pattern="[A-Za-z]{2}" maxlength="2" data-i18n-placeholder="phState">
         <select id="shipping-option" name="shippingOption" hidden aria-label="Opção de frete"></select>
         <p class="shipping-note" role="status"></p>
-        <p class="checkout-error" role="alert"></p><button class="button button-dark" type="submit">Ir para o pagamento <span>→</span></button>
+        <p class="checkout-error" role="alert"></p><button class="button button-dark" type="submit"><span data-i18n="checkoutGo">Ir para o pagamento</span> <span>→</span></button>
       </form>
     </div>
     <div class="toast" role="status" aria-live="polite"></div>

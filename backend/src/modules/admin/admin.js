@@ -21,9 +21,7 @@ function showDetail(title, body) {
 }
 
 // Upload de capa usa multipart: fetch SEM content-type manual (o navegador define o boundary).
-async function uploadCover(productId, fileInput) {
-  const file = fileInput.files?.[0];
-  if (!file) throw new Error("Escolha um arquivo PNG/JPG/WebP ou PDF.");
+async function uploadCoverFile(productId, file) {
   const response = await fetch(`${api}/admin/products/${encodeURIComponent(productId)}/cover`, {
     method: "POST",
     headers: { "x-admin-token": token() },
@@ -31,6 +29,13 @@ async function uploadCover(productId, fileInput) {
   });
   if (!response.ok) throw new Error((await response.json()).error || "Falha no upload");
   return response.json();
+}
+
+async function uploadCover(productId, fileInput) {
+  const file = fileInput.files?.[0];
+  if (!file) throw new Error("Escolha um arquivo PNG/JPG/WebP ou PDF.");
+  await uploadCoverFile(productId, file);
+  fileInput.value = "";
 }
 
 document.addEventListener("click", async (event) => {
@@ -77,18 +82,3 @@ document.addEventListener("click", async (event) => {
 
 document.querySelector("#load").addEventListener("click", load);
 
-document.querySelector("#new-product").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const weight = Number(form.get("weight"));
-  try {
-    await request("/admin/products", { method: "POST", body: JSON.stringify({
-      title: form.get("title"), slug: form.get("slug"), category: form.get("category"),
-      description: form.get("description"), priceCents: Math.round(Number(form.get("price")) * 100),
-      weightGrams: weight > 0 ? weight : undefined,
-      stock: Number(form.get("stock"))
-    }) });
-    event.currentTarget.reset();
-    await load();
-  } catch (error) { document.querySelector("#status").textContent = error.message; }
-});

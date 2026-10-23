@@ -29,6 +29,7 @@ model Product {
   title       String
   category    String
   description String
+  context     String      @default("")
   priceCents  Int
   weightGrams Int         @default(300)
   stock       Int         @default(0)

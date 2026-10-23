@@ -80,18 +80,48 @@ function productColor(slug) {
   ];
 }
 
+let categoriaAtiva = "todas";
+
 function renderCatalog(apiBase) {
   const grid = document.querySelector(".catalog-section .book-grid");
   if (!grid) return;
   const api = apiBase || catalogApiUrl();
-  grid.innerHTML = Object.values(products)
+  const todos = Object.values(products);
+  const categorias = [...new Set(todos.map((product) => product.category))].sort((a, b) =>
+    a.localeCompare(b, "pt"),
+  );
+  if (categoriaAtiva !== "todas" && !categorias.includes(categoriaAtiva)) categoriaAtiva = "todas";
+
+  // Filtros por categoria (aparecem a partir de 2 categorias)
+  const secao = document.querySelector(".catalog-section");
+  let filtros = secao?.querySelector(".catalog-filters");
+  if (categorias.length >= 2 && secao) {
+    if (!filtros) {
+      filtros = document.createElement("div");
+      filtros.className = "catalog-filters";
+      grid.before(filtros);
+    }
+    const opcoes = ["todas", ...categorias];
+    filtros.innerHTML = opcoes
+      .map((cat) => {
+        const rotulo = cat === "todas" ? uiText("filterAll", "Todas") : window.escapeHtml(cat);
+        const ativa = cat === categoriaAtiva ? " active" : "";
+        return `<button type="button" class="catalog-filter${ativa}" data-categoria="${window.escapeHtml(cat)}">${rotulo}</button>`;
+      })
+      .join("");
+  } else if (filtros) {
+    filtros.remove();
+  }
+
+  grid.innerHTML = todos
     .map((product) => {
+      const oculto = categoriaAtiva !== "todas" && product.category !== categoriaAtiva ? " hidden" : "";
       const cover =
         product.coverKind === "image"
           ? `<img class="cover-photo" src="${api}/products/${encodeURIComponent(product.slug)}/cover" alt="Capa: ${window.escapeHtml(product.title)}">`
           : `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
       return `
-    <article class="book-card" tabindex="0" role="button">
+    <article class="book-card${oculto}" data-categoria="${window.escapeHtml(product.category)}" tabindex="0" role="button">
       <div class="book-stage"><div class="book-cover ${product.color} ${product.coverKind === "image" ? "has-photo" : ""}">${cover}</div></div>
       <p class="book-category">${window.escapeHtml(product.category)}</p><h3>${window.escapeHtml(product.title)}</h3><p class="book-author">Autor anônimo</p>
       <div class="price-row"><b>${formatPrice(product.price)}</b><a class="learn-more" href="livro.html?livro=${encodeURIComponent(product.slug)}">Saiba mais</a><button data-add="${window.escapeHtml(product.title)}">Adicionar +</button></div>
@@ -109,10 +139,28 @@ function renderCatalog(apiBase) {
     .forEach((button) => button.addEventListener("click", () => addToCart(button.dataset.add)));
 }
 
-async function loadRemoteCatalog() {
-  const found = await fetchFirstOk("/products");
-  if (!found) return;
-  const { products: remoteProducts } = await found.response.json();
+// Filtros por categoria (delegação no container: os botões são recriados a cada render)
+document.querySelector(".catalog-section")?.addEventListener("click", (event) => {
+  const botao = event.target.closest(".catalog-filter");
+  if (!botao) return;
+  categoriaAtiva = botao.dataset.categoria;
+  renderCatalog(apiBaseAtual || undefined);
+});
+
+let ultimoCatalogoJson = "";
+let apiBaseAtual = null;
+
+function applyRemoteCatalog(remoteProducts, base) {
+  const serializado = JSON.stringify(remoteProducts);
+  // Re-renderiza somente quando o conteúdo mudar (evita "piscadas" a cada ciclo).
+  if (
+    serializado === ultimoCatalogoJson &&
+    base === apiBaseAtual &&
+    document.querySelector(".catalog-section .book-card")
+  )
+    return;
+  ultimoCatalogoJson = serializado;
+  apiBaseAtual = base;
   products = Object.fromEntries(
     remoteProducts.map((product) => [
       product.title,
@@ -123,8 +171,28 @@ async function loadRemoteCatalog() {
       },
     ]),
   );
-  renderCatalog(found.base);
+  renderCatalog(base);
 }
+
+async function loadRemoteCatalog() {
+  const found = await fetchFirstOk("/products");
+  if (!found) return;
+  const { products: remoteProducts } = await found.response.json();
+  applyRemoteCatalog(remoteProducts, found.base);
+}
+
+// Atualização harmônica: livros novos e preços aparecem sem o comprador recarregar a página.
+async function refreshCatalogIfChanged() {
+  if (document.hidden || typeof fetchFirstOk !== "function") return;
+  const found = await fetchFirstOk("/products");
+  if (found) applyRemoteCatalog((await found.response.json()).products, found.base);
+}
+setInterval(() => void refreshCatalogIfChanged(), 30000);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) void refreshCatalogIfChanged();
+});
+// Troca de idioma: re-render do catálogo (rótulos de filtro e conteúdo dinâmico)
+window.addEventListener("nascente:language", () => renderCatalog(apiBaseAtual || undefined));
 
 function formatPrice(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });

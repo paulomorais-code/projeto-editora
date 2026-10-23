@@ -20,20 +20,24 @@
     ? [window.NASCENTE_API_URL]
     : ["/api", "http://localhost:3333/api"];
 
-  const STATUS_LABEL = {
-    PENDING: "Aguardando pagamento",
-    PAID: "Pago — em preparação",
-    PACKING: "Em embalagem",
-    SHIPPED: "Enviado",
-    DELIVERED: "Entregue",
-    CANCELLED: "Cancelado",
-  };
-  const PAYMENT_LABEL = {
-    PENDING: "Pagamento pendente",
-    APPROVED: "Pagamento aprovado",
-    REJECTED: "Pagamento recusado",
-    REFUNDED: "Reembolsado",
-  };
+  function uiText(key, fallback) {
+    return window.uiTranslations?.[window.currentLanguage || "pt"]?.[key] || fallback;
+  }
+
+  const STATUS_LABEL = () => ({
+    PENDING: uiText("orderAwaiting", "Aguardando pagamento"),
+    PAID: uiText("orderPaid", "Pago — em preparação"),
+    PACKING: uiText("orderPacking", "Em embalagem"),
+    SHIPPED: uiText("orderShipped", "Enviado"),
+    DELIVERED: uiText("orderDelivered", "Entregue"),
+    CANCELLED: uiText("orderCancelled", "Cancelado"),
+  });
+  const PAYMENT_LABEL = () => ({
+    PENDING: uiText("payPending", "Pagamento pendente"),
+    APPROVED: uiText("payApproved", "Pagamento aprovado"),
+    REJECTED: uiText("payRejected", "Pagamento recusado"),
+    REFUNDED: uiText("payRefunded", "Reembolsado"),
+  });
 
   function money(value) {
     return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -52,18 +56,20 @@
       .join("");
     const frete =
       order.shippingCents > 0
-        ? `<p>Frete (${window.escapeHtml(order.shippingMethod || "")}): ${money(order.shippingCents / 100)}</p>`
-        : "<p>Frete: a combinar com a editora</p>";
+        ? `<p>${uiText("orderShipping", "Frete")} (${window.escapeHtml(order.shippingMethod || "")}): ${money(order.shippingCents / 100)}</p>`
+        : `<p>${uiText("orderShippingTbd", "Frete: a combinar com a editora")}</p>`;
     const tracking = order.trackingCode
-      ? `<p><strong>Código de rastreio:</strong> ${window.escapeHtml(order.trackingCode)}</p>`
+      ? `<p><strong>${uiText("orderTracking", "Código de rastreio:")}</strong> ${window.escapeHtml(order.trackingCode)}</p>`
       : "";
+    const statusLabels = STATUS_LABEL();
+    const paymentLabels = PAYMENT_LABEL();
     root.innerHTML = `
-      <p class="order-status-line"><strong>${STATUS_LABEL[order.status] || order.status}</strong> · ${PAYMENT_LABEL[order.paymentStatus] || order.paymentStatus}</p>
+      <p class="order-status-line"><strong>${statusLabels[order.status] || order.status}</strong> · ${paymentLabels[order.paymentStatus] || order.paymentStatus}</p>
       <ul>${items}</ul>
       ${frete}
-      <p><strong>Total: ${money(order.totalCents / 100)}</strong></p>
+      <p><strong>${uiText("orderTotal", "Total")}: ${money(order.totalCents / 100)}</strong></p>
       ${tracking}
-      <p class="order-id">Pedido <code>${window.escapeHtml(order.id)}</code> — guarde este link para acompanhar.</p>
+      <p class="order-id">${uiText("orderIdLabel", "Pedido")} <code>${window.escapeHtml(order.id)}</code> ${uiText("orderKeepLink", "— guarde este link para acompanhar.")}</p>
     `;
   }
 
@@ -82,7 +88,9 @@
   function loadOrder() {
     const attempt = (index) => {
       if (index >= apiCandidates.length) {
-        renderError("Não foi possível carregar o pedido agora. Tente novamente em instantes.");
+        renderError(
+          uiText("orderLoadError", "Não foi possível carregar o pedido agora. Tente novamente em instantes."),
+        );
         return;
       }
       fetch(`${apiCandidates[index]}/orders/${encodeURIComponent(orderId)}`, {

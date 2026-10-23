@@ -9,6 +9,7 @@ export async function listProducts() {
       title: true,
       category: true,
       description: true,
+      context: true,
       priceCents: true,
       weightGrams: true,
       stock: true,
