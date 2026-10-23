@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PACKING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REFUNDED
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  title       String
+  category    String
+  description String
+  priceCents  Int
+  weightGrams Int         @default(300)
+  stock       Int         @default(0)
+  active      Boolean     @default(true)
+  coverFile   String?
+  coverMime   String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id                String        @id @default(cuid())
+  status            OrderStatus   @default(PENDING)
+  paymentStatus     PaymentStatus @default(PENDING)
+  totalCents        Int
+  shippingCents     Int           @default(0)
+  shippingMethod    String?
+  customerEmailHash String
+  customerEmailEnc  String?
+  shippingAddress   Json
+  paymentProviderId String?       @unique
+  trackingCode      String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  items             OrderItem[]
+  paymentEvents     PaymentEvent[]
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  productId   String
+  title       String
+  unitCents   Int
+  quantity    Int
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+}
+
+model PaymentEvent {
+  id                String   @id @default(cuid())
+  provider          String
+  providerEventId   String
+  payloadHash       String
+  processedAt       DateTime @default(now())
+  orderId           String?
+  order             Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@unique([provider, providerEventId])
+}

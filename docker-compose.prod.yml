@@ -1,0 +1,64 @@
+# Produção: app + Postgres + Nginx na mesma VPS.
+# Uso: cp backend/.env.production.example backend/.env  → preencha → docker compose -f docker-compose.prod.yml up -d --build
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nascente
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina no .env}
+      POSTGRES_DB: nascente
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nascente"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    # Sem ports: acessível apenas pela rede interna do compose
+
+  app:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3333
+      HOST: 0.0.0.0
+      DATABASE_URL: postgresql://nascente:${POSTGRES_PASSWORD}@postgres:5432/nascente?schema=public
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN}
+      TRUST_PROXY: "true"
+      MERCADOPAGO_ACCESS_TOKEN: ${MERCADOPAGO_ACCESS_TOKEN:-}
+      MERCADOPAGO_WEBHOOK_SECRET: ${MERCADOPAGO_WEBHOOK_SECRET:-}
+      EDITOR_API_TOKEN: ${EDITOR_API_TOKEN:?gere com openssl rand -base64 48}
+      ORDER_ACCESS_SECRET: ${ORDER_ACCESS_SECRET:?gere com openssl rand -base64 48}
+      EMAIL_ENC_KEY: ${EMAIL_ENC_KEY:?gere com openssl rand -base64 48}
+      ORDER_TTL_HOURS: ${ORDER_TTL_HOURS:-24}
+      RETENTION_DAYS: ${RETENTION_DAYS:-0}
+      CORREIOS_BASE_URL: ${CORREIOS_BASE_URL:-}
+      CORREIOS_CLIENT_ID: ${CORREIOS_CLIENT_ID:-}
+      CORREIOS_CLIENT_SECRET: ${CORREIOS_CLIENT_SECRET:-}
+      CORREIOS_CONTRACT_NUMBER: ${CORREIOS_CONTRACT_NUMBER:-}
+      LOG_LEVEL: info
+    volumes:
+      - uploads-data:/app/uploads
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nascente.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./nginx/certbot:/var/www/certbot:ro
+
+volumes:
+  postgres-data:
+  uploads-data:

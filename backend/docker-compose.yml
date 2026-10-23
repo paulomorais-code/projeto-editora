@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nascente
+      POSTGRES_PASSWORD: nascente
+      POSTGRES_DB: nascente
+    ports:
+      # 5432 costuma ser ocupado por um PostgreSQL nativo da máquina; o projeto usa 5433.
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - nascente-postgres:/var/lib/postgresql/data
+
+volumes:
+  nascente-postgres:

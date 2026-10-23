@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    paths: ["backend/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["backend/**", ".github/workflows/ci.yml"]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: nascente
+          POSTGRES_PASSWORD: nascente
+          POSTGRES_DB: nascente
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U nascente"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://nascente:nascente@localhost:5433/nascente?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Gerar Prisma Client
+        run: npx prisma generate
+      - name: Aplicar migrações
+        run: npx prisma migrate deploy
+      - name: Testes (unitários + integração)
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Auditoria de dependências
+        run: npm audit --audit-level=high
+      - name: Formatação (Prettier)
+        run: npm run format:check

@@ -1,0 +1,10 @@
+node_modules
+backend/dist
+backend/src/generated
+backend/uploads
+backend/prisma/migrations
+backend/node_modules
+package-lock.json
+*.log
+pagamento/
+**/*.md
