@@ -92,4 +92,12 @@ Antes de produção, configure PostgreSQL, execute a migração Prisma e preench
 5. O catálogo inaugural reúne `A vida em Goiás`, `Brasília: da capital do progresso à capital da ordem` e `Cadernos do mundo 2027 para países periféricos`.
 6. Ao adicionar uma obra, atualize os dados em `assets/js/cart.js` e `assets/js/book-page.js`, além dos cards em `index.html`.
 
+## 📚 Adicionar um livro novo (fluxo editorial)
+
+Livro novo é **evento editorial**: o conteúdo (título, sinopse, contexto, traduções, capa) é preparado com revisão — por isso não há formulário de criação no painel. O painel continua dono de **estoque, preço, pedidos, rastreio e capa**.
+
+Fluxo: você envia o material (capa PDF/PNG, sinopse, contexto, textos FR/ES se houver) → o livro entra via `backend/prisma/seed.ts` + dados estáticos (`cart.js`, `book-page.js`, `index.html`) + traduções em `i18n.js` → commit → CI → deploy. A vitrine atualiza sozinha (polling de 30 s) e filtros por categoria organizam a grade automaticamente.
+
+Traduções FR/ES de livro novo são opcionais: quando não existem, a página cai para o português (o site é servido com o idioma da navegação do visitante apenas nos textos de interface).
+
 O projeto não depende de servidor ou build neste estágio e pode ser aberto diretamente no navegador.

@@ -577,9 +577,13 @@ function setLanguage(language) {
     .querySelectorAll(".language-button")
     .forEach((button) => button.classList.toggle("active", button.dataset.language === language));
   // Passada genérica: qualquer elemento com data-i18n recebe a tradução (cobre chaves novas).
+  // Strings do dicionário são CONFIÁVEIS (estáticas, versionadas) — <br /> nelas usa innerHTML;
+  // conteúdo DINÂMICO (API) continua proibido de entrar aqui sem escapeHtml (AGENTS.md §5.5).
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const value = t[element.dataset.i18n];
-    if (value) element.textContent = value;
+    if (!value) return;
+    if (value.includes("<")) element.innerHTML = value;
+    else element.textContent = value;
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
     const value = t[element.dataset.i18nPlaceholder];

@@ -121,7 +121,7 @@ function renderCatalog(apiBase) {
           ? `<img class="cover-photo" src="${api}/products/${encodeURIComponent(product.slug)}/cover" alt="Capa: ${window.escapeHtml(product.title)}">`
           : `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
       return `
-    <article class="book-card${oculto}" data-categoria="${window.escapeHtml(product.category)}" tabindex="0" role="button">
+    <article class="book-card" ${oculto ? "hidden" : ""} data-categoria="${window.escapeHtml(product.category)}" tabindex="0" role="button">
       <div class="book-stage"><div class="book-cover ${product.color} ${product.coverKind === "image" ? "has-photo" : ""}">${cover}</div></div>
       <p class="book-category">${window.escapeHtml(product.category)}</p><h3>${window.escapeHtml(product.title)}</h3><p class="book-author">Autor anônimo</p>
       <div class="price-row"><b>${formatPrice(product.price)}</b><a class="learn-more" href="livro.html?livro=${encodeURIComponent(product.slug)}">Saiba mais</a><button data-add="${window.escapeHtml(product.title)}">Adicionar +</button></div>
