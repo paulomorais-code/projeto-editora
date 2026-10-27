@@ -244,3 +244,4 @@ footer{padding:50px 7%;background:#182d3b}
 .event-panel:nth-of-type(5),
 .event-panel:nth-of-type(6){background:#fffdf9}
 .event-panel{border-bottom:1px solid #d5d0c6}
+.home-secao{padding:70px 6.5%}.home-secao[hidden]{display:none}.book-card .promo-preco{color:var(--red)}.book-card .promo-antigo{text-decoration:line-through;color:var(--muted);margin-right:6px;font-weight:400}.book-card small{margin-left:6px;color:var(--muted)}

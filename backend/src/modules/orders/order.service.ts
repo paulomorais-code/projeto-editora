@@ -19,7 +19,9 @@ export async function createOrder(input: CreateOrderInput) {
       const product = bySlug.get(item.slug);
       if (!product) throw new AppError("PRODUCT_NOT_FOUND", 400);
       if (product.stock < item.quantity) throw new AppError("INSUFFICIENT_STOCK", 409);
-      return { product, quantity: item.quantity };
+      // Preço efetivo: promoção quando existir (LOM-style), senão preço cheio.
+      const precoUnitario = product.promoPriceCents ?? product.priceCents;
+      return { product, quantity: item.quantity, precoUnitario };
     });
 
     // Frete: validado contra o token assinado pela cotação (o cliente não dita o preço).
@@ -60,10 +62,10 @@ export async function createOrder(input: CreateOrderInput) {
         customerEmailEnc: encryptEmail(input.email),
         shippingAddress: input.shippingAddress,
         items: {
-          create: items.map(({ product, quantity }) => ({
+          create: items.map(({ product, quantity, precoUnitario }) => ({
             productId: product.id,
             title: product.title,
-            unitCents: product.priceCents,
+            unitCents: precoUnitario,
             quantity,
           })),
         },

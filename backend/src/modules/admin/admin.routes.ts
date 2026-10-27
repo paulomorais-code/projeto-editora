@@ -6,6 +6,7 @@ import { AppError } from "../../lib/errors.js";
 import { decryptEmail } from "../../lib/security.js";
 import { cancelAndRestock } from "../orders/order.service.js";
 import { saveCover, deleteCoverFile, coverMimeToKind } from "../../lib/covers.js";
+import { saveCatalogPdf, removeCatalogPdf } from "../../lib/catalog-pdf.js";
 
 const stockSchema = z.object({ stock: z.number().int().min(0).max(100000) });
 const priceSchema = z.object({ priceCents: z.number().int().min(1).max(100000000) });
@@ -18,8 +19,13 @@ const productSchema = z.object({
   category: z.string().trim().min(1).max(100),
   description: z.string().trim().min(1).max(5000),
   context: z.string().trim().max(5000).optional(),
+  collection: z.string().trim().max(100).optional(),
+  pages: z.number().int().min(1).max(5000).optional(),
+  year: z.number().int().min(1400).max(2100).optional(),
   priceCents: z.number().int().min(1).max(100000000),
+  promoPriceCents: z.number().int().min(1).max(100000000).optional(),
   weightGrams: z.number().int().min(1).max(30000).optional(),
+  featured: z.boolean().optional(),
   stock: z.number().int().min(0).max(100000),
 });
 const productUpdateSchema = z.object({
@@ -27,7 +33,12 @@ const productUpdateSchema = z.object({
   category: z.string().trim().min(1).max(100).optional(),
   description: z.string().trim().min(1).max(5000).optional(),
   context: z.string().trim().max(5000).optional(),
+  collection: z.string().trim().max(100).nullable().optional(),
+  pages: z.number().int().min(1).max(5000).nullable().optional(),
+  year: z.number().int().min(1400).max(2100).nullable().optional(),
+  featured: z.boolean().optional(),
   priceCents: z.number().int().min(1).max(100000000).optional(),
+  promoPriceCents: z.number().int().min(1).max(100000000).nullable().optional(),
   weightGrams: z.number().int().min(1).max(30000).optional(),
   stock: z.number().int().min(0).max(100000).optional(),
   active: z.boolean().optional(),
@@ -77,6 +88,13 @@ export async function adminRoutes(app: FastifyInstance) {
     const body = productUpdateSchema.safeParse(request.body);
     if (!id.success || !body.success) return reply.code(400).send({ error: "INVALID_PRODUCT_UPDATE" });
     if (Object.keys(body.data).length === 0) return reply.code(400).send({ error: "INVALID_PRODUCT_UPDATE" });
+    if (
+      body.data.promoPriceCents != null &&
+      body.data.priceCents != null &&
+      body.data.promoPriceCents >= body.data.priceCents
+    ) {
+      return reply.code(400).send({ error: "PROMO_MUST_BE_LOWER" });
+    }
     try {
       const product = await prisma.product.update({ where: { id: id.data.id }, data: body.data });
       request.log.info(
@@ -141,6 +159,21 @@ export async function adminRoutes(app: FastifyInstance) {
       "Admin removed cover",
     );
     return { product: { id: product.id, hasCover: false, coverKind: null } };
+  });
+
+  // Catálogo corrente em PDF (publicado pelo editor)
+  app.post("/admin/catalog/pdf", async (request, reply) => {
+    const file = await request.file();
+    if (!file) return reply.code(400).send({ error: "CATALOG_FILE_REQUIRED" });
+    saveCatalogPdf(await file.toBuffer());
+    request.log.info({ event: "admin_action", action: "catalog.publish" }, "Admin published catalog PDF");
+    return { published: true };
+  });
+
+  app.delete("/admin/catalog/pdf", async (request) => {
+    removeCatalogPdf();
+    request.log.info({ event: "admin_action", action: "catalog.unpublish" }, "Admin removed catalog PDF");
+    return { published: false };
   });
 
   app.patch("/admin/products/:id/stock", async (request, reply) => {
