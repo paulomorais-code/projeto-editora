@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Pre-commit: impede que segredos do .env local ou arquivos sensíveis entrem no Git.
+# Instalação (uma vez por clone): git config core.hooksPath .githooks
+RAIZ="$(git rev-parse --show-toplevel)"
+FALHAS=0
+
+# 1) Nenhum arquivo de segredos/dados pode ser adicionado (mesmo com git add -f)
+if git diff --cached --name-only | grep -qE "^backend/\.env$|^backend/uploads/|^backend/server\.log$"; then
+  echo "🚨 BLOQUEADO: arquivos de segredos/dados no commit (.env, uploads/, logs)."
+  FALHAS=1
+fi
+
+# 2) Nenhuma linha ADICIONADA pode conter os valores reais do backend/.env
+while IFS='=' read -r chave valor; do
+  [ -z "$valor" ] && continue
+  case "$chave" in
+    EDITOR_API_TOKEN|ORDER_ACCESS_SECRET|EMAIL_ENC_KEY|DATABASE_URL|MERCADOPAGO_ACCESS_TOKEN|MERCADOPAGO_WEBHOOK_SECRET)
+      if git diff --cached -U0 | grep -F "+.*$valor" >/dev/null 2>&1 || git diff --cached -U0 | grep -F "+$valor" >/dev/null 2>&1; then
+        echo "🚨 BLOQUEADO: valor real de $chave encontrado no commit. Gere outro (openssl rand -base64 48) e use placeholders."
+        FALHAS=1
+      fi
+      ;;
+  esac
+done < "$RAIZ/backend/.env"
+
+[ "$FALHAS" -eq 0 ] && exit 0
+echo "Commit bloqueado pelo hook de segredos (.githooks/pre-commit)."
+exit 1
