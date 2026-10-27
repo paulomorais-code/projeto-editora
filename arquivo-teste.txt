@@ -1,0 +1,1 @@
+EDITOR_API_TOKEN=s20PnfkvyC9PBG4AXHO9vn0BHlrrBzdwgvKZwzYCp+xXLTQJllAvCOry9WL7Dpca # teste
