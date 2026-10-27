@@ -116,7 +116,7 @@ Verificação: `npm test` 14/14 · `npm run build` OK · `npm audit` **0 vulnera
 
 ### F-03 (Alta) — Token admin previsível
 
-`backend/.env` contém `EDITOR_API_TOKEN=teste-editor-nascente-123456789012345678` — string digitada por humano. O `.env` está ignorado pelo git (bom), mas:
+`backend/.env` continha `EDITOR_API_TOKEN=teste-editor-nascente-123…` (valor completo omitido desta análise pública) — string digitada por humano. O `.env` está ignorado pelo git (bom), mas:
 
 1. Padrões assim **vazam** (prints, backups, cópia de `.env` entre ambientes).
 2. Se este arquivo for copiado para produção, o painel está comprometido.
