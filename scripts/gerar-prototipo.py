@@ -19,6 +19,7 @@ import zlib
 from datetime import datetime, timedelta, timezone
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONT = os.path.join(RAIZ, "site")
 DESTINO = os.path.join(RAIZ, "prototipo")
 HOJE = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
@@ -206,11 +207,11 @@ def principal():
 
     # 1) copia páginas + assets
     for pagina in PAGINAS:
-        src = os.path.join(RAIZ, pagina)
+        src = os.path.join(FRONT, pagina)
         dst = os.path.join(DESTINO, pagina)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
-    shutil.copytree(os.path.join(RAIZ, "assets"), os.path.join(DESTINO, "assets"))
+    shutil.copytree(os.path.join(FRONT, "assets"), os.path.join(DESTINO, "assets"))
 
     # 2) injeta mock-config como primeiro script em cada página
     for pagina in PAGINAS:

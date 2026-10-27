@@ -6,5 +6,5 @@ backend/prisma/migrations
 backend/node_modules
 package-lock.json
 *.log
-pagamento/
+site/pagamento/
 **/*.md

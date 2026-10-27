@@ -5,8 +5,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format:check": "prettier --check \"assets/js/**/*.js\" \"backend/src/**/*.ts\" \"backend/scripts/*.mjs\"",
-    "format": "prettier --write \"assets/js/**/*.js\" \"backend/src/**/*.ts\" \"backend/scripts/*.mjs\""
+    "format:check": "prettier --check \"site/assets/js/**/*.js\" \"backend/src/**/*.ts\" \"backend/scripts/*.mjs\"",
+    "format": "prettier --write \"site/assets/js/**/*.js\" \"backend/src/**/*.ts\" \"backend/scripts/*.mjs\""
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

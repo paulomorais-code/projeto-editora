@@ -85,10 +85,10 @@ Antes de produção, configure PostgreSQL, execute a migração Prisma e preench
 
 ## Fluxo de desenvolvimento
 
-1. Abra `index.html` para navegar pelo catálogo.
-2. Use “Saiba mais” para acessar `livro.html?livro=...`.
-3. Mantenha estilos em `assets/css/styles.css`.
-4. Separe interações por responsabilidade em `assets/js/`.
+1. Abra `site/index.html` para navegar pelo catálogo (ou `python3 backend/scripts/static-server.py` e acesse `http://localhost:5500`).
+2. Use “Saiba mais” para acessar `site/livro.html?livro=...`.
+3. Mantenha estilos em `site/assets/css/styles.css`.
+4. Separe interações por responsabilidade em `site/assets/js/`.
 5. O catálogo inaugural reúne `A vida em Goiás`, `Brasília: da capital do progresso à capital da ordem` e `Cadernos do mundo 2027 para países periféricos`.
 6. Ao adicionar uma obra, atualize os dados em `assets/js/cart.js` e `assets/js/book-page.js`, além dos cards em `index.html`.
 

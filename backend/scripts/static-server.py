@@ -10,7 +10,9 @@ Uso: python3 backend/scripts/static-server.py   (porta 5500, raiz do projeto)
 import http.server
 import os
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "site"
+)
 PORT = 5500
 
 

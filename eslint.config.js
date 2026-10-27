@@ -14,6 +14,7 @@ export default [
       "backend/src/generated/**",
       "backend/uploads/**",
       "backend/prisma/migrations/**",
+      "prototipo/**",
       "**/*.log"
     ]
   },
@@ -32,7 +33,7 @@ export default [
   },
   {
     // Frontend (vanilla, sem TypeScript): bloqueia padrões inseguros conhecidos.
-    files: ["assets/js/**/*.js", "backend/src/modules/admin/admin.js"],
+    files: ["site/assets/js/**/*.js", "backend/src/modules/admin/admin.js"],
     rules: {
       "no-eval": "error",
       "no-implied-eval": "error",

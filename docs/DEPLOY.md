@@ -14,9 +14,8 @@ pelo Nginx a partir de `./site` (cópia da raiz do repositório).
 
 ```bash
 git clone <seu-repo> nascente && cd nascente
-mkdir -p site nginx/certs nginx/certbot
-# site = cópia do frontend estático (raiz do repo, sem backend/)
-rsync -a --exclude backend --exclude .git --exclude nginx --exclude site ./ site/
+mkdir -p nginx/certs nginx/certbot
+# o frontend já vive em site/ no repositório
 cp backend/.env.production.example backend/.env
 nano backend/.env          # preencha TUDO (senhas/segredos com openssl rand -base64 48)
 nano nginx/nascente.conf   # troque SEU_IP_AQUI pelo IP/VPN que acessa o painel
@@ -69,7 +68,6 @@ Teste end-to-end: compre um livro com estoque > 0 e confirme o webhook marca `PA
 
 ```bash
 git pull
-rsync -a --exclude backend --exclude .git --exclude nginx --exclude site ./ site/
 docker compose -f docker-compose.prod.yml build app
 docker compose -f docker-compose.prod.yml up -d --force-recreate app
 docker compose -f docker-compose.prod.yml exec -T app npx prisma migrate deploy

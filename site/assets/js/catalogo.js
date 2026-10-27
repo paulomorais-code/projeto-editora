@@ -3,7 +3,6 @@
   const apiCandidates = window.NASCENTE_API_URL
     ? [window.NASCENTE_API_URL]
     : ["/api", "http://localhost:3333/api"];
-  let apiBase = apiCandidates[0];
 
   function uiText(key, fallback) {
     return window.uiTranslations?.[window.currentLanguage || "pt"]?.[key] || fallback;
@@ -14,7 +13,6 @@
   }
 
   let pagina = 1;
-  let ultimaConsulta = "";
   const porSlug = new Map(); // slug → produto (para adicionar ao carrinho no formato da index)
   const grid = document.querySelector("#catalogo-grid");
   const mais = document.querySelector("#catalogo-mais");

@@ -30,20 +30,28 @@ Regras de negócio essenciais (não quebre):
 
 ```text
 .
-├── index.html / livro.html      # Loja estática
-├── assets/js/                   # cart.js, checkout.js, book-page.js, i18n.js
+├── site/                        # Frontend público (estático)
+│   ├── index.html / livro.html / catalogo.html / pedido.html
+│   ├── pagamento/               # páginas de retorno do Mercado Pago
+│   └── assets/js/               # cart.js, checkout.js, catalogo.js, book-page.js, i18n.js…
 ├── backend/
-│   ├── prisma/                  # schema.prisma e seed.ts
+│   ├── prisma/                  # schema.prisma, migrações e seed.ts
 │   ├── src/
 │   │   ├── config/env.ts        # Variáveis de ambiente validadas com Zod (única fonte)
-│   │   ├── lib/                 # prisma.ts, security.ts, admin-auth.ts
+│   │   ├── lib/                 # prisma.ts, security.ts, admin-auth.ts, order-expiry.ts
+│   │   ├── integration/         # testes de integração (banco real)
 │   │   └── modules/
-│   │       ├── catalog/         # GET /api/products (público)
+│   │       ├── catalog/         # GET /api/products, /api/catalog, capas, PDF
 │   │       ├── orders/          # POST /api/orders, GET /api/orders/:id, payment-preference
 │   │       ├── payments/        # Webhook Mercado Pago assinado + service
 │   │       ├── shipping/        # POST /api/shipping/quote (Correios)
 │   │       └── admin/           # Rotas protegidas + admin.html/admin.js servidos em /admin/
 │   └── docker-compose.yml       # PostgreSQL local
+├── docs/                        # ANALISE-SEGURANCA, DEPLOY, TESTE-LOJA
+├── prototipo/                   # gerado: front + API simulada para o Netlify
+├── scripts/gerar-prototipo.py   # regenera o protótipo
+├── nginx/nascente.conf          # proxy de produção (allowlist do /admin/)
+└── docker-compose.prod.yml      # app + Postgres + Nginx
 ```
 
 `backend/dist/` é artefato de build (ignorado pelo git). Não edite; edite `src/` e rode `npm run build`.
@@ -116,18 +124,18 @@ Frontend: sem build. Abrir `index.html` (funciona até via `file://`) ou servir 
 
 ## 8. Estado da segurança e dívida restante
 
-A análise completa, com os 20 achados de segurança e o status de cada correção, está em **`ANALISE-SEGURANCA.md`** (§1.2). Situação em 2026-10-23: **18 de 20 achados corrigidos e verificados**, lacunas funcionais P0/P1 implementadas, e a maior parte do checklist de qualidade resolvida:
+A análise completa, com os 20 achados de segurança e o status de cada correção, está em **`docs/ANALISE-SEGURANCA.md`** (§1.2). Situação em 2026-10-23: **18 de 20 achados corrigidos e verificados**, lacunas funcionais P0/P1 implementadas, e a maior parte do checklist de qualidade resolvida:
 
 - ✅ **CI** (`.github/workflows/ci.yml`): Postgres de serviço, lint, migração, testes (unitários + integração), build, audit, prettier
 - ✅ **ESLint + Prettier** na raiz (`eslint.config.js`, `.prettierrc`): bloqueia `as any`, `eval`, `no-console` no backend; warn de `innerHTML` no frontend (uso legítimo atual sempre com `escapeHtml`)
 - ✅ **Testes de integração** (`backend/src/integration/`): concorrência de estoque, token anti-IDOR, webhook (válido/inválido/duplicado/regressão/referência desconhecida), expiração com reposição, fluxo admin completo, retenção LGPD
 - ✅ **Retenção LGPD**: `RETENTION_DAYS` + `anonymizeOldOrders` (anonimiza endereço/e-mail de pedidos finalizados)
-- ✅ **Kit de deploy**: `Dockerfile`, `docker-compose.prod.yml`, `nginx/nascente.conf` (com allowlist do `/admin/`), `.env.production.example`, `DEPLOY.md`
+- ✅ **Kit de deploy**: `Dockerfile`, `docker-compose.prod.yml`, `nginx/nascente.conf` (com allowlist do `/admin/`), `.env.production.example`, `docs/DEPLOY.md`
 
 Restante (depende de contas/decisões externas):
 
 - **Mercado Pago real** (credenciais de produção + webhook) — requer conta vendedora aprovada
 - **Correios real ou decisão formal de "frete a combinar"** — requer contrato/décision do editor
-- **VPS + domínio + TLS** — seguir `DEPLOY.md`; allowlist do `/admin/` já está no nginx.conf (ajustar IP)
+- **VPS + domínio + TLS** — seguir `docs/DEPLOY.md`; allowlist do `/admin/` já está no nginx.conf (ajustar IP)
 - **Sessão individual no admin** (trocar token estático por login) — médio prazo se houver mais de um editor
 - **Notificação automática ao comprador** (e-mail/transação): hoje o contato é manual via endpoint auditado
