@@ -1,0 +1,40 @@
+{
+ "products": [
+  {
+   "slug": "a-vida-em-goias",
+   "title": "A vida em Goiás",
+   "category": "Goiás",
+   "collection": "Catálogo inaugural",
+   "description": "Uma escrita sobre pertencimento, memória e deslocamento.",
+   "context": "A ideia nasceu de uma série de cadernos escritos durante viagens pelo interior de Goiás.",
+   "priceCents": 7800,
+   "promoPriceCents": 6800,
+   "pages": 160,
+   "year": 2024,
+   "featured": true,
+   "weightGrams": 280,
+   "stock": 5,
+   "coverKind": "image",
+   "createdAt": "2026-10-27T14:22:47.000Z",
+   "unidades": 7
+  },
+  {
+   "slug": "cadernos-do-mundo-2027",
+   "title": "Cadernos do mundo 2027 para países periféricos",
+   "category": "Mundo",
+   "collection": "Catálogo inaugural",
+   "description": "Ensaios sobre os futuros dos países periféricos.",
+   "context": "Cadernos de observação, hipótese e disputa sobre os futuros possíveis.",
+   "priceCents": 7200,
+   "promoPriceCents": null,
+   "pages": 200,
+   "year": 2024,
+   "featured": true,
+   "weightGrams": 310,
+   "stock": 5,
+   "coverKind": "image",
+   "createdAt": "2026-09-27T14:22:47.000Z",
+   "unidades": 4
+  }
+ ]
+}

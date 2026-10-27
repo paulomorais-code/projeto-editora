@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NASCENTE — editora e livraria independente." />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <title>NASCENTE — Editora independente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=prototipo-20261027142247" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#inicio" aria-label="Nascente, início">NASCENTE<span>.</span></a>
+      <span class="header-ribbon" data-i18n="headerRibbon">CATÁLOGO 2024 · ENSAIO · LITERATURA · PENSAMENTO</span>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="catalogo.html">Catálogo completo</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#resumo">Sobre</a>
+      </nav>
+      <div class="header-actions">
+        <div class="language-switcher" aria-label="Idioma">
+          <button class="language-button active" data-language="pt">PT</button>
+          <button class="language-button" data-language="fr">FR</button>
+          <button class="language-button" data-language="es">ES</button>
+        </div>
+        <button class="icon-button cart-button" aria-label="Abrir carrinho">
+          <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 1.9-1.4L21 8H6" />
+            <path d="M9 20a1 1 0 1 0 0-.01M18 20a1 1 0 1 0 0-.01" />
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+        <button class="menu-button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-copy">
+          <p class="eyebrow">Editora & livraria independente</p>
+          <h1>Livros para<br />compreender o<br />mundo <em>além da<br />superfície.</em></h1>
+          <p class="hero-intro">Pensamento independente sobre poder, economia, sociedade e as ideias que moldam nosso tempo.</p>
+          <div class="hero-links">
+            <a class="button button-dark" href="#catalogo">Explorar catálogo <span>→</span></a>
+            <a class="text-link" href="#catalogo">Conhecer nosso catálogo</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="grid-art"></div>
+          <div class="hero-book book-navy">
+            <small>NASCENTE / GOIÁS</small>
+            <strong>A vida em<br />Goiás</strong>
+            <i></i>
+            <span>AUTOR ANÔNIMO</span>
+          </div>
+          <p class="art-caption" data-i18n="artCaption">Uma coleção de vozes<br />e territórios</p>
+          <span class="art-page">01 / 08</span>
+        </div>
+      </section>
+
+      <section class="section catalog-section" id="catalogo">
+        <div class="section-heading">
+          <div><p class="eyebrow">Catálogo inaugural</p><h2>Catálogo para começar</h2></div>
+          <span class="catalog-note"><a class="text-link" href="catalogo.html" data-i18n="verCatalogoCompleto">Ver catálogo completo →</a></span>
+        </div>
+        <div class="book-grid">
+          <article class="book-card">
+            <div class="book-stage"><div class="book-cover book-navy"><small>NASCENTE / GOIÁS</small><strong>A vida em<br />Goiás</strong><i></i><span>AUTOR ANÔNIMO</span></div></div>
+            <p class="book-category">Goiás</p><h3>A vida em Goiás</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 78,00</b><a class="learn-more" href="livro.html?livro=a-vida-em-goias">Saiba mais</a><button data-add="A vida em Goiás">Adicionar +</button></div>
+          </article>
+          <article class="book-card">
+            <div class="book-stage"><div class="book-cover book-red"><small>NASCENTE / BRASÍLIA</small><strong>Brasília:<br />da capital do progresso à capital da ordem</strong><i></i><span>AUTOR ANÔNIMO</span></div></div>
+            <p class="book-category">Brasília</p><h3>Brasília: da capital do progresso à capital da ordem</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 64,00</b><a class="learn-more" href="livro.html?livro=brasilia-da-capital-do-progresso-a-capital-da-ordem">Saiba mais</a><button data-add="Brasília: da capital do progresso à capital da ordem">Adicionar +</button></div>
+          </article>
+          <article class="book-card">
+            <div class="book-stage"><div class="book-cover book-sand"><small>NASCENTE / MUNDO</small><strong>Cadernos<br />do mundo 2027</strong><i></i><span>PARA PAÍSES PERIFÉRICOS</span></div></div>
+            <p class="book-category">Mundo</p><h3>Cadernos do mundo 2027 para países periféricos</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 72,00</b><a class="learn-more" href="livro.html?livro=cadernos-do-mundo-2027">Saiba mais</a><button data-add="Cadernos do mundo 2027 para países periféricos">Adicionar +</button></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section home-secao" id="novidades">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="novidadesEyebrow">Recém-chegados</p><h2 data-i18n="novidadesTitle">Novidades da Nascente</h2></div><span class="catalog-note" data-i18n="novidadesNote">Últimos 90 dias</span></div>
+        <div id="home-novidades" class="book-grid"></div>
+      </section>
+
+      <section class="section home-secao" id="destaques" hidden>
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="destaquesEyebrow">Escolha do editor</p><h2 data-i18n="destaquesTitle">Destaques</h2></div></div>
+        <div id="home-destaques" class="book-grid"></div>
+      </section>
+
+      <section class="section home-secao" id="mais-solicitados" hidden>
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="maisVendidosEyebrow">Preferências dos leitores</p><h2 data-i18n="maisVendidosTitle">Os 10 mais solicitados do mês</h2></div><span class="catalog-note" data-i18n="maisVendidosNote">Pedidos pagos dos últimos 30 dias</span></div>
+        <div id="home-mais-vendidos" class="book-grid"></div>
+      </section>
+
+      <section class="book-features" id="livros">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="featuredEyebrow">Leituras em destaque</p><h2 data-i18n="featuredTitle">Três livros, três entradas</h2></div></div>
+        <article class="book-feature">
+          <div class="feature-cover book-navy"><small>NASCENTE / GOIÁS</small><strong>A vida em<br />Goiás</strong><i></i><span>AUTOR ANÔNIMO</span></div>
+          <div class="feature-copy"><p class="book-category" data-i18n="featureCategoryGoias">01 / Goiás</p><h3>A vida em Goiás</h3><p data-i18n="featureGoias">Uma escrita sobre pertencimento, memória e deslocamento, atenta às vozes e paisagens que formam o centro-oeste brasileiro.</p><a class="text-link" data-i18n="readBook" href="livro.html?livro=a-vida-em-goias">Ler sobre o livro →</a></div>
+        </article>
+        <article class="book-feature book-feature-reverse">
+          <div class="feature-cover book-red"><small>NASCENTE / BRASÍLIA</small><strong>Brasília:<br />da capital do progresso à capital da ordem</strong><i></i><span>AUTOR ANÔNIMO</span></div>
+          <div class="feature-copy"><p class="book-category" data-i18n="featureCategoryBrasilia">02 / Brasília</p><h3>Brasília: da capital do progresso à capital da ordem</h3><p data-i18n="featureBrasilia">Uma leitura crítica da transformação da capital, das promessas modernistas de desenvolvimento ao ordenamento político e espacial da cidade.</p><a class="text-link" data-i18n="readBook" href="livro.html?livro=brasilia-da-capital-do-progresso-a-capital-da-ordem">Ler sobre o livro →</a></div>
+        </article>
+        <article class="book-feature">
+          <div class="feature-cover book-sand"><small>NASCENTE / MUNDO</small><strong>Cadernos<br />do mundo 2027</strong><i></i><span>PARA PAÍSES PERIFÉRICOS</span></div>
+          <div class="feature-copy"><p class="book-category" data-i18n="featureCategoryWorld">03 / Mundo</p><h3>Cadernos do mundo 2027 para países periféricos</h3><p data-i18n="featureWorld">Ensaios e perguntas para imaginar os futuros dos países periféricos a partir de soberania, trabalho, tecnologia e dependência.</p><a class="text-link" data-i18n="readBook" href="livro.html?livro=cadernos-do-mundo-2027">Ler sobre o livro →</a></div>
+        </article>
+      </section>
+
+      <section class="catalog-summary" id="resumo">
+        <div class="summary-intro"><p class="eyebrow" data-i18n="summaryEyebrow">O primeiro catálogo</p><h2 data-i18n="summaryTitle">Livros para ler o território e o futuro.</h2><p data-i18n="summaryText">A Nascente começa com três obras que partem do Brasil e se abrem para o mundo. São livros sobre lugar, poder e as disputas que definem o amanhã.</p></div>
+        <div class="summary-points"><div><strong>01</strong><p data-i18n="summaryPoint1">Memória e experiência em Goiás.</p></div><div><strong>02</strong><p data-i18n="summaryPoint2">A cidade como projeto e conflito.</p></div><div><strong>03</strong><p data-i18n="summaryPoint3">Futuros pensados desde a periferia.</p></div></div>
+      </section>
+
+      <section class="events-section" id="eventos">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="eventsEyebrow">Agenda</p><h2 data-i18n="eventsTitle">Eventos de lançamento</h2></div><span class="catalog-note" data-i18n="eventsNote">Encontros · conversas · leitura</span></div>
+        <div class="event-tabs" role="tablist" aria-label="Eventos por livro" data-i18n-aria="eventsAria">
+          <button type="button" class="event-tab active" role="tab" aria-selected="true" aria-controls="events-goias" data-event-tab="goias">A vida em Goiás</button>
+          <button type="button" class="event-tab" role="tab" aria-selected="false" aria-controls="events-brasilia" data-event-tab="brasilia">Brasília</button>
+          <button type="button" class="event-tab" role="tab" aria-selected="false" aria-controls="events-mundo" data-event-tab="mundo">Cadernos do mundo 2027</button>
+        </div>
+        <div class="event-panel active" id="events-goias" role="tabpanel" data-event-panel="goias"><div class="event-date"><strong>—</strong><span data-i18n="comingSoon">EM<br />BREVE</span></div><div><p class="event-type" data-i18n="eventGoiasType">Lançamento e conversa</p><h3>A vida em Goiás</h3><p data-i18n="eventComing">Data e local serão divulgados em breve.</p><a class="text-link" data-i18n="followUpdates" href="#eventos">Acompanhar novidades →</a></div></div>
+        <div class="event-panel" id="events-brasilia" role="tabpanel" data-event-panel="brasilia" hidden><div class="event-date"><strong>—</strong><span data-i18n="comingSoon">EM<br />BREVE</span></div><div><p class="event-type" data-i18n="eventBrasiliaType">Mesa de debate</p><h3>Brasília: da capital do progresso à capital da ordem</h3><p data-i18n="eventComing">Data e local serão divulgados em breve.</p><a class="text-link" data-i18n="followUpdates" href="#eventos">Acompanhar novidades →</a></div></div>
+        <div class="event-panel" id="events-mundo" role="tabpanel" data-event-panel="mundo" hidden><div class="event-date"><strong>—</strong><span data-i18n="comingSoon">EM<br />BREVE</span></div><div><p class="event-type" data-i18n="eventWorldType">Aula aberta e lançamento</p><h3>Cadernos do mundo 2027 para países periféricos</h3><p data-i18n="eventComing">Data e local serão divulgados em breve.</p><a class="text-link" data-i18n="followUpdates" href="#eventos">Acompanhar novidades →</a></div></div>
+      </section>
+    </main>
+    <footer><a class="logo" href="#inicio">NASCENTE<span>.</span></a><p data-i18n="footerDescription">Livros para compreender o mundo além da superfície.</p><small data-i18n="copyright">© 2024 Nascente. Todos os direitos reservados.</small></footer>
+    <div class="overlay" data-close-overlay></div>
+    <aside class="cart-drawer" aria-label="Carrinho de compras" aria-hidden="true">
+      <div class="drawer-header"><div><p class="eyebrow" data-i18n="cartSelection">Sua seleção</p><h2 data-i18n="cartTitle">carrinho</h2></div><button class="close-button" data-close-cart aria-label="Fechar carrinho">×</button></div>
+      <div class="cart-items"></div>
+      <div class="cart-empty"><span data-i18n="cartEmpty">Seu carrinho está vazio.</span><br /><a href="#catalogo" data-close-cart data-i18n="exploreCatalog">Explore o catálogo →</a></div>
+      <div class="cart-summary"><div><span data-i18n="subtotal">Subtotal</span><strong>R$ 0,00</strong></div><button class="checkout-button" data-checkout><span data-i18n="checkout">Continuar para finalizar</span> <span>→</span></button></div>
+    </aside>
+    <div class="book-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+      <div class="modal-card"><button class="close-button" data-close-modal aria-label="Fechar detalhes">×</button><div class="modal-cover"></div><div class="modal-content"><p class="eyebrow" id="modal-category"></p><h2 id="modal-title"></h2><p class="modal-author">Autor anônimo</p><p id="modal-description"></p><div class="modal-buy"><strong id="modal-price"></strong><button class="button button-dark" data-modal-add>Adicionar ao carrinho <span>→</span></button></div><a class="modal-context-link" data-modal-more href="#">Conheça o contexto de criação <span>↗</span></a></div></div>
+    </div>
+    <div class="checkout-modal" aria-hidden="true">
+      <form class="checkout-form">
+        <button type="button" class="close-button" data-close-checkout aria-label="Fechar checkout">×</button>
+        <p class="eyebrow" data-i18n="checkoutEyebrow">Finalizar pedido</p><h2 data-i18n="checkoutTitle">Dados de entrega</h2>
+        <input name="email" type="email" placeholder="E-mail" required maxlength="254" data-i18n-placeholder="phEmail">
+        <input name="name" placeholder="Nome completo" required maxlength="120" data-i18n-placeholder="phName">
+        <div class="checkout-row"><input name="postalCode" placeholder="CEP" required pattern="\d{5}-?\d{3}" data-i18n-placeholder="phPostal"><input name="number" placeholder="Número" required maxlength="20" data-i18n-placeholder="phNumber"></div>
+        <input name="street" placeholder="Rua" required maxlength="160" data-i18n-placeholder="phStreet"><input name="complement" placeholder="Complemento (opcional)" maxlength="120" data-i18n-placeholder="phComplement">
+        <input name="neighborhood" placeholder="Bairro" required maxlength="100" data-i18n-placeholder="phNeighborhood"><input name="city" placeholder="Cidade" required maxlength="100" data-i18n-placeholder="phCity">
+        <input name="state" placeholder="UF" required pattern="[A-Za-z]{2}" maxlength="2" data-i18n-placeholder="phState">
+        <select id="shipping-option" name="shippingOption" hidden aria-label="Opção de frete"></select>
+        <p class="shipping-note" role="status"></p>
+        <p class="checkout-error" role="alert"></p><button class="button button-dark" type="submit"><span data-i18n="checkoutGo">Ir para o pagamento</span> <span>→</span></button>
+      </form>
+    </div>
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="assets/js/mock-config.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/dom.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/i18n.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/cart.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/checkout.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/home-catalogo.js?v=prototipo-20261027142247"></script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+{
+ "products": [
+  {
+   "slug": "a-vida-em-goias",
+   "title": "A vida em Goiás",
+   "category": "Goiás",
+   "collection": "Catálogo inaugural",
+   "description": "Uma escrita sobre pertencimento, memória e deslocamento.",
+   "context": "A ideia nasceu de uma série de cadernos escritos durante viagens pelo interior de Goiás.",
+   "priceCents": 7800,
+   "promoPriceCents": 6800,
+   "pages": 160,
+   "year": 2024,
+   "featured": true,
+   "weightGrams": 280,
+   "stock": 5,
+   "coverKind": "image",
+   "createdAt": "2026-10-27T14:22:47.000Z"
+  },
+  {
+   "slug": "brasilia-da-capital-do-progresso-a-capital-da-ordem",
+   "title": "Brasília: da capital do progresso à capital da ordem",
+   "category": "Brasília",
+   "collection": "Catálogo inaugural",
+   "description": "Uma leitura crítica da transformação da capital.",
+   "context": "O projeto nasceu do desejo de ler a cidade como experiência histórica e disputa de futuros.",
+   "priceCents": 6400,
+   "promoPriceCents": null,
+   "pages": 180,
+   "year": 2024,
+   "featured": true,
+   "weightGrams": 340,
+   "stock": 5,
+   "coverKind": "image",
+   "createdAt": "2026-10-27T14:22:47.000Z"
+  },
+  {
+   "slug": "cadernos-do-mundo-2027",
+   "title": "Cadernos do mundo 2027 para países periféricos",
+   "category": "Mundo",
+   "collection": "Catálogo inaugural",
+   "description": "Ensaios sobre os futuros dos países periféricos.",
+   "context": "Cadernos de observação, hipótese e disputa sobre os futuros possíveis.",
+   "priceCents": 7200,
+   "promoPriceCents": null,
+   "pages": 200,
+   "year": 2024,
+   "featured": true,
+   "weightGrams": 310,
+   "stock": 5,
+   "coverKind": "image",
+   "createdAt": "2026-09-27T14:22:47.000Z"
+  },
+  {
+   "slug": "novo-lançamento-exemplo",
+   "title": "Novo lançamento (exemplo)",
+   "category": "Mundo",
+   "collection": "Novidades",
+   "description": "Livro de exemplo para demonstrar as novidades do catálogo corrente.",
+   "context": "Criado apenas como demonstração do protótipo.",
+   "priceCents": 5900,
+   "promoPriceCents": null,
+   "pages": 128,
+   "year": 2026,
+   "featured": false,
+   "weightGrams": 250,
+   "stock": 10,
+   "coverKind": "image",
+   "createdAt": "2026-10-27T14:22:47.000Z"
+  }
+ ]
+}

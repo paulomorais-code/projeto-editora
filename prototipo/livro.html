@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Detalhes do livro — Nascente." />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <title>Livro — Nascente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=prototipo-20261027142247" />
+  </head>
+  <body class="book-page">
+    <header class="site-header">
+      <a class="logo" href="index.html#inicio" aria-label="Nascente, início">NASCENTE<span>.</span></a>
+      <span class="header-ribbon" data-i18n="headerRibbon">CATÁLOGO 2024 · ENSAIO · LITERATURA · PENSAMENTO</span>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html#inicio">Início</a>
+        <a href="index.html#catalogo">Catálogo</a>
+        <a href="index.html#livros">Temas</a>
+        <a href="index.html#resumo">Sobre</a>
+      </nav>
+      <div class="book-page-actions"><div class="language-switcher" aria-label="Idioma"><button class="language-button active" data-language="pt">PT</button><button class="language-button" data-language="fr">FR</button><button class="language-button" data-language="es">ES</button></div><a class="book-page-cart" href="index.html#catalogo">Voltar ao catálogo <span>→</span></a></div>
+    </header>
+    <main class="book-detail">
+      <a class="back-link" href="index.html#catalogo">← Voltar ao catálogo</a>
+      <div class="book-detail-grid">
+        <div class="detail-stage"><div id="detail-cover" class="book-cover"></div></div>
+        <article class="detail-copy">
+          <p id="detail-category" class="eyebrow"></p>
+          <h1 id="detail-title"></h1>
+          <p class="detail-author" data-i18n="anonymousAuthor">Autor anônimo</p>
+          <div class="detail-rule"></div>
+          <p class="detail-label">Sinopse</p>
+          <p id="detail-description" class="detail-description"></p>
+          <section class="creation-context">
+            <p class="detail-label">Contexto de criação</p>
+            <h2>Como este livro nasceu</h2>
+            <p id="detail-context"></p>
+          </section>
+          <dl class="book-facts">
+            <div><dt data-i18n="edition">Edição</dt><dd data-i18n="editionValue">Nascente, 2024</dd></div>
+            <div><dt data-i18n="format">Formato</dt><dd data-i18n="formatValue">Brochura · 160 páginas</dd></div>
+            <div><dt>ISBN</dt><dd>978-65-00000-00-0</dd></div>
+          </dl>
+          <div class="detail-buy"><strong id="detail-price"></strong><button id="detail-add" class="button button-dark">Adicionar ao carrinho <span>→</span></button></div>
+          <p id="detail-feedback" class="detail-feedback" role="status"></p>
+        </article>
+      </div>
+    </main>
+    <footer><a class="logo" href="index.html#inicio">NASCENTE<span>.</span></a><p data-i18n="footerDescription">Livros para compreender o mundo além da superfície.</p><small data-i18n="copyright">© 2024 Nascente. Todos os direitos reservados.</small></footer>
+    <script src="assets/js/mock-config.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/dom.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/book-page.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/i18n.js?v=prototipo-20261027142247"></script>
+  </body>
+</html>

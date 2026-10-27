@@ -74,8 +74,7 @@
             cards || `<p class="catalogo-vazio">${uiText("semResultados", "Nenhum livro encontrado.")}</p>`;
         else grid.insertAdjacentHTML("beforeend", cards);
         mais.hidden = meta.page >= meta.pages;
-        // filtros (uma vez): categorias e coleções distintas de TODOS os ativos
-        preencherFiltros(base);
+        preencherFiltros(products);
         return;
       } catch {
         // tenta a próxima origem
@@ -85,34 +84,25 @@
   }
 
   let filtrosPreenchidos = false;
-  async function preencherFiltros(base) {
+  function preencherFiltros(products) {
     if (filtrosPreenchidos && selCategoria.options.length > 1) return;
-    try {
-      const response = await fetch(`${base}/products`);
-      if (!response.ok) return;
-      const { products } = await response.json();
-      const categorias = [...new Set(products.map((p) => p.category))].sort((a, b) =>
-        a.localeCompare(b, "pt"),
-      );
-      const colecoes = [...new Set(products.map((p) => p.collection).filter(Boolean))].sort((a, b) =>
-        a.localeCompare(b, "pt"),
-      );
-      const catSel = selCategoria.value;
-      const colSel = selColecao.value;
-      selCategoria.innerHTML =
-        `<option value="">${uiText("filtroCategoria", "Todas as categorias")}</option>` +
-        categorias
-          .map((c) => `<option${c === catSel ? " selected" : ""}>${window.escapeHtml(c)}</option>`)
-          .join("");
-      selColecao.innerHTML =
-        `<option value="">${uiText("filtroColecao", "Todas as coleções")}</option>` +
-        colecoes
-          .map((c) => `<option${c === colSel ? " selected" : ""}>${window.escapeHtml(c)}</option>`)
-          .join("");
-      filtrosPreenchidos = true;
-    } catch {
-      // silencioso: filtros são opcionais
-    }
+    const categorias = [...new Set(products.map((p) => p.category))].sort((a, b) => a.localeCompare(b, "pt"));
+    const colecoes = [...new Set(products.map((p) => p.collection).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b, "pt"),
+    );
+    const catSel = selCategoria.value;
+    const colSel = selColecao.value;
+    selCategoria.innerHTML =
+      `<option value="">${uiText("filtroCategoria", "Todas as categorias")}</option>` +
+      categorias
+        .map((c) => `<option${c === catSel ? " selected" : ""}>${window.escapeHtml(c)}</option>`)
+        .join("");
+    selColecao.innerHTML =
+      `<option value="">${uiText("filtroColecao", "Todas as coleções")}</option>` +
+      colecoes
+        .map((c) => `<option${c === colSel ? " selected" : ""}>${window.escapeHtml(c)}</option>`)
+        .join("");
+    filtrosPreenchidos = true;
   }
 
   // Seções da home estilo LOM dentro do catálogo: mais vendidos do mês

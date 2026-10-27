@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Catálogo corrente — Nascente." />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <title>Catálogo — Nascente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=prototipo-20261027142247" />
+    <style>
+      .catalogo-page{padding:60px 6.5% 90px}
+      .catalogo-head{border-top:1px solid #3e3b37;padding-top:18px;margin-bottom:34px}
+      .catalogo-head h1{font:48px "Playfair Display",serif;font-weight:400;letter-spacing:-.03em;margin:0 0 8px}
+      .catalogo-head p{color:var(--muted);font-size:14px;margin:0}
+      .catalogo-barra{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 30px}
+      .catalogo-barra input,.catalogo-barra select{border:1px solid var(--line);background:#fffdf9;padding:12px;font:13px "DM Sans";outline:none}
+      .catalogo-barra input{flex:1;min-width:200px}
+      .catalogo-barra button{background:var(--ink);color:#fff;padding:12px 20px;font-size:11px;font-weight:600}
+      .catalogo-pdf{margin:0 0 34px}
+      .catalogo-pdf a{font-size:12px;border-bottom:1px solid var(--red);padding-bottom:6px;color:var(--red);font-weight:600}
+      .catalogo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 20px;min-height:200px}
+      .catalogo-vazio{color:var(--muted);font:15px "Playfair Display",serif;grid-column:1/-1}
+      .catalogo-mais{margin:40px auto 0;display:block}
+      .catalogo-secoes{margin-top:90px}
+      .catalogo-secao{border-top:1px solid #3e3b37;padding-top:18px;margin-bottom:30px}
+      .catalogo-secao h2{font:32px "Playfair Display",serif;font-weight:400;letter-spacing:-.02em;margin:0}
+      .catalogo-secao .sub{color:var(--muted);font-size:12px;margin:4px 0 24px}
+      .catalogo-secoes .book-grid{grid-template-columns:repeat(4,1fr)}
+      .promo-preco{color:var(--red);font-weight:600}
+      .promo-antigo{text-decoration:line-through;color:var(--muted);margin-right:6px;font-weight:400}
+      @media(max-width:900px){.catalogo-grid,.catalogo-secoes .book-grid{grid-template-columns:repeat(2,1fr)}.catalogo-head h1{font-size:36px}}
+      @media(max-width:520px){.catalogo-grid,.catalogo-secoes .book-grid{grid-template-columns:1fr 1fr}.catalogo-page{padding:40px 5% 70px}}
+    </style>
+  </head>
+  <body class="catalogo-body">
+    <header class="site-header">
+      <a class="logo" href="index.html#inicio" aria-label="Nascente, início">NASCENTE<span>.</span></a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html#inicio">Início</a>
+        <a href="index.html#catalogo">Catálogo</a>
+        <a href="catalogo.html" aria-current="page">Catálogo completo</a>
+        <a href="index.html#eventos">Eventos</a>
+      </nav>
+    </header>
+
+    <main class="catalogo-page">
+      <div class="catalogo-head">
+        <p class="eyebrow">Nascente</p>
+        <h1 data-i18n="catalogoTitle">Catálogo corrente</h1>
+        <p data-i18n="catalogoSub">Todas as obras disponíveis da editora — atualizado a cada novo lançamento.</p>
+      </div>
+
+      <p class="catalogo-pdf"><a id="catalogo-pdf-link" data-i18n="catalogoPdf" href="/api/catalog/pdf" hidden>📄 Baixar catálogo corrente (PDF)</a></p>
+
+      <div class="catalogo-barra">
+        <input id="catalogo-q" type="search" data-i18n-placeholder="buscarPlaceholder" placeholder="Buscar por título…" aria-label="Buscar" />
+        <select id="catalogo-categoria" aria-label="Categoria"><option value="">Todas as categorias</option></select>
+        <select id="catalogo-colecao" aria-label="Coleção"><option value="">Todas as coleções</option></select>
+        <label style="font-size:12px;display:flex;gap:6px;align-items:center"><input id="catalogo-novidades" type="checkbox" /> <span data-i18n="soNovidades">Só novidades (90 dias)</span></label>
+        <button id="catalogo-buscar" type="button" data-i18n="buscarBtn">Buscar</button>
+      </div>
+
+      <div id="catalogo-grid" class="catalogo-grid"><p class="catalogo-vazio">Carregando…</p></div>
+      <button id="catalogo-mais" class="button button-dark catalogo-mais" type="button" hidden data-i18n="carregarMais">Carregar mais <span>→</span></button>
+
+      <div class="catalogo-secoes">
+        <section class="catalogo-secao" id="secao-mais-vendidos" hidden>
+          <h2 data-i18n="maisSolicitadosTitle">Os 10 mais solicitados do mês</h2>
+          <p class="sub" data-i18n="maisSolicitadosSub">Calculado a partir dos pedidos pagos dos últimos 30 dias.</p>
+          <div id="grid-mais-vendidos" class="book-grid"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <a class="logo" href="index.html#inicio">NASCENTE<span>.</span></a>
+      <p data-i18n="footerDescription">Livros para compreender o mundo além da superfície.</p>
+      <small data-i18n="copyright">© 2026 Nascente. Todos os direitos reservados.</small>
+    </footer>
+
+    <script src="assets/js/mock-config.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/i18n.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/dom.js?v=prototipo-20261027142247"></script>
+    <script src="assets/js/catalogo.js?v=prototipo-20261027142247"></script>
+  </body>
+</html>
