@@ -92,9 +92,9 @@ function renderCover(apiBase) {
     window.NASCENTE_API_URL ||
     (window.location.protocol === "file:" ? "http://localhost:3333/api" : "/api");
   if (book.coverKind === "image") {
-    detailCover.innerHTML = `<img class="cover-photo" src="${apiBaseCover}/products/${encodeURIComponent(slug)}/cover" alt="Capa: ${window.escapeHtml(book.title)}">`;
+    detailCover.innerHTML = `<img class="cover-photo" src="${apiBaseCover}/products/${encodeURIComponent(slug)}/cover?v=${window.escapeHtml(String(product.coverV ?? ""))}" alt="Capa: ${window.escapeHtml(book.title)}">`;
   } else if (book.coverKind === "pdf") {
-    detailCover.innerHTML = `<embed class="cover-pdf" src="${apiBaseCover}/products/${encodeURIComponent(slug)}/cover" type="application/pdf" title="Capa: ${window.escapeHtml(book.title)}">`;
+    detailCover.innerHTML = `<embed class="cover-pdf" src="${apiBaseCover}/products/${encodeURIComponent(slug)}/cover?v=${window.escapeHtml(String(book.coverV ?? ""))}" type="application/pdf" title="Capa: ${window.escapeHtml(book.title)}">`;
   } else {
     detailCover.innerHTML = `<small>NASCENTE / ${window.escapeHtml(book.category.toUpperCase())}</small><strong>${window.escapeHtml(book.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
   }

@@ -118,7 +118,7 @@ function renderCatalog(apiBase) {
       const oculto = categoriaAtiva !== "todas" && product.category !== categoriaAtiva ? " hidden" : "";
       const cover =
         product.coverKind === "image"
-          ? `<img class="cover-photo" src="${api}/products/${encodeURIComponent(product.slug)}/cover" alt="Capa: ${window.escapeHtml(product.title)}">`
+          ? `<img class="cover-photo" src="${api}/products/${encodeURIComponent(product.slug)}/cover?v=${window.escapeHtml(String(product.coverV ?? ""))}" alt="Capa: ${window.escapeHtml(product.title)}">`
           : `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
       return `
     <article class="book-card" ${oculto ? "hidden" : ""} data-categoria="${window.escapeHtml(product.category)}" tabindex="0" role="button">

@@ -245,3 +245,19 @@ footer{padding:50px 7%;background:#182d3b}
 .event-panel:nth-of-type(6){background:#fffdf9}
 .event-panel{border-bottom:1px solid #d5d0c6}
 .home-secao{padding:70px 6.5%}.home-secao[hidden]{display:none}.book-card .promo-preco{color:var(--red)}.book-card .promo-antigo{text-decoration:line-through;color:var(--muted);margin-right:6px;font-weight:400}.book-card small{margin-left:6px;color:var(--muted)}
+
+/* Feed rolável (seções da home estilo LOM) */
+.feed-row{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 6.5% 28px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.feed-row .book-card{flex:0 0 auto;width:196px;scroll-snap-align:start}
+.feed-row .book-stage{height:300px}
+.feed-row .book-cover{height:245px;width:164px}
+.feed-row .book-cover strong{font-size:17px;margin-top:46px}
+.feed-row .price-row{flex-wrap:wrap;row-gap:6px}
+.feed-row::-webkit-scrollbar{height:8px}
+.feed-row::-webkit-scrollbar-track{background:transparent}
+.feed-row::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+/* Catálogo: grade fluida */
+.catalogo-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+/* Barra de busca do catálogo */
+.catalogo-barra label{border:1px solid var(--line);background:#fffdf9;padding:11px 14px;font-size:12px;display:flex;gap:8px;align-items:center}
+.catalogo-barra label input{accent-color:var(--ink)}
