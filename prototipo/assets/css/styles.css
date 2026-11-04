@@ -268,3 +268,18 @@ footer{padding:50px 7%;background:#182d3b}
 .hero-book.has-photo .cover-photo{width:100%;height:100%;object-fit:contain;display:block}
 .feature-cover.has-photo{padding:0;background:#fff;overflow:hidden}
 .feature-cover.has-photo img{width:100%;height:100%;object-fit:contain;display:block}
+
+/* Painel de feed estilo LOM: trilha + setas vinho */
+.feed-wrap{position:relative;padding:4px 6.5% 10px}
+.feed-wrap .feed-row{padding:6px 0 26px}
+.feed-btn{position:absolute;top:38%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;font-size:22px;line-height:1;border:2px solid #fff;z-index:2;display:grid;place-items:center;box-shadow:0 4px 16px #0003;transition:.2s}
+.feed-btn:hover{background:#8f2a25;transform:translateY(-50%) scale(1.06)}
+.feed-btn.prev{left:3%}.feed-btn.next{right:3%}
+.feed-dica{margin:0 6.5%}
+/* Acentos vinho nas seções da home */
+.home-secao .section-heading,.catalog-section .section-heading{border-top-color:var(--red)}
+.home-secao .catalog-note,.catalog-section .catalog-note{color:var(--red)}
+/* Novidades: cards compactos (2 últimos lançamentos) */
+.novidades-row .book-card{width:260px}
+.novidades-row .book-stage{height:320px}
+.novidades-row .book-cover{height:265px;width:185px}

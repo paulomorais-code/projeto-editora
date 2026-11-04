@@ -83,7 +83,7 @@ function productColor(slug) {
 let categoriaAtiva = "todas";
 
 function renderCatalog(apiBase) {
-  const grid = document.querySelector(".catalog-section .book-grid");
+  const grid = document.querySelector("#catalogo-feed") || document.querySelector(".catalog-section .book-grid");
   if (!grid) return;
   const api = apiBase || catalogApiUrl();
   const todos = Object.values(products);
@@ -138,6 +138,15 @@ function renderCatalog(apiBase) {
     .querySelectorAll("[data-add]")
     .forEach((button) => button.addEventListener("click", () => addToCart(button.dataset.add)));
 }
+
+// Setas ‹ › do painel de feed (rola a trilha com suavidade)
+document.querySelectorAll("[data-feed-dir]").forEach((botao) => {
+  botao.addEventListener("click", () => {
+    const trilha = document.querySelector("#catalogo-feed");
+    if (!trilha) return;
+    trilha.scrollBy({ left: Number(botao.dataset.feedDir) * trilha.clientWidth * 0.8, behavior: "smooth" });
+  });
+});
 
 // Filtros por categoria (delegação no container: os botões são recriados a cada render)
 document.querySelector(".catalog-section")?.addEventListener("click", (event) => {

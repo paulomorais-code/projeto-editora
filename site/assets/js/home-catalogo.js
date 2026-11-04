@@ -86,7 +86,7 @@
         if (!response.ok) continue;
         apiBase = base;
         const { novidades, destaques, maisVendidos } = await response.json();
-        preencher("#home-novidades", novidades);
+        preencher("#home-novidades", novidades.slice(0, 2)); // apenas os últimos 2 lançamentos
         preencher("#home-destaques", destaques);
         preencher("#home-mais-vendidos", maisVendidos);
         return;

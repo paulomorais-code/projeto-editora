@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20261027" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20261027bb" />
   </head>
   <body>
     <header class="site-header">
@@ -60,30 +60,22 @@
         </div>
       </section>
 
-      <section class="section catalog-section" id="catalogo">
+      <section class="section catalog-section secao-vinho" id="catalogo">
         <div class="section-heading">
-          <div><p class="eyebrow">Catálogo inaugural</p><h2>Catálogo para começar</h2></div>
-          <span class="catalog-note"><a class="text-link" href="catalogo.html" data-i18n="verCatalogoCompleto">Ver catálogo completo →</a></span>
+          <div><p class="eyebrow">Catálogo corrente</p><h2>Catálogo completo</h2></div>
+          <span class="catalog-note"><a class="text-link" href="catalogo.html" data-i18n="verCatalogoCompleto">Ver página do catálogo →</a></span>
         </div>
-        <div class="book-grid">
-          <article class="book-card">
-            <div class="book-stage"><div class="book-cover book-navy"><small>NASCENTE / GOIÁS</small><strong>A vida em<br />Goiás</strong><i></i><span>AUTOR ANÔNIMO</span></div></div>
-            <p class="book-category">Goiás</p><h3>A vida em Goiás</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 78,00</b><a class="learn-more" href="livro.html?livro=a-vida-em-goias">Saiba mais</a><button data-add="A vida em Goiás">Adicionar +</button></div>
-          </article>
-          <article class="book-card">
-            <div class="book-stage"><div class="book-cover book-red"><small>NASCENTE / BRASÍLIA</small><strong>Brasília:<br />da capital do progresso à capital da ordem</strong><i></i><span>AUTOR ANÔNIMO</span></div></div>
-            <p class="book-category">Brasília</p><h3>Brasília: da capital do progresso à capital da ordem</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 64,00</b><a class="learn-more" href="livro.html?livro=brasilia-da-capital-do-progresso-a-capital-da-ordem">Saiba mais</a><button data-add="Brasília: da capital do progresso à capital da ordem">Adicionar +</button></div>
-          </article>
-          <article class="book-card">
-            <div class="book-stage"><div class="book-cover book-sand"><small>NASCENTE / MUNDO</small><strong>Cadernos<br />do mundo 2027</strong><i></i><span>PARA PAÍSES PERIFÉRICOS</span></div></div>
-            <p class="book-category">Mundo</p><h3>Cadernos do mundo 2027 para países periféricos</h3><p class="book-author">Autor anônimo</p><div class="price-row"><b>R$ 72,00</b><a class="learn-more" href="livro.html?livro=cadernos-do-mundo-2027">Saiba mais</a><button data-add="Cadernos do mundo 2027 para países periféricos">Adicionar +</button></div>
-          </article>
+        <div class="feed-wrap">
+          <button class="feed-btn prev" type="button" data-feed-dir="-1" aria-label="Livros anteriores">‹</button>
+          <div id="catalogo-feed" class="feed-row"></div>
+          <button class="feed-btn next" type="button" data-feed-dir="1" aria-label="Próximos livros">›</button>
         </div>
+        <p class="feed-dica"><a class="text-link" href="catalogo.html" data-i18n="verCatalogoCompleto">Ver catálogo completo →</a></p>
       </section>
 
       <section class="section home-secao" id="novidades">
-        <div class="section-heading"><div><p class="eyebrow" data-i18n="novidadesEyebrow">Recém-chegados</p><h2 data-i18n="novidadesTitle">Novidades da Nascente</h2></div><span class="catalog-note" data-i18n="novidadesNote">Últimos 90 dias</span></div>
-        <div id="home-novidades" class="feed-row"></div>
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="novidadesEyebrow">Recém-chegados</p><h2 data-i18n="novidadesTitle">Últimos lançamentos</h2></div><span class="catalog-note" data-i18n="novidadesNote">Últimos 90 dias</span></div>
+        <div id="home-novidades" class="feed-row novidades-row"></div>
       </section>
 
       <section class="section home-secao" id="destaques" hidden>
@@ -156,10 +148,10 @@
       </form>
     </div>
     <div class="toast" role="status" aria-live="polite"></div>
-    <script src="assets/js/dom.js?v=20261027"></script>
-    <script src="assets/js/i18n.js?v=20261027"></script>
-    <script src="assets/js/cart.js?v=20261027"></script>
-    <script src="assets/js/checkout.js?v=20261027"></script>
-    <script src="assets/js/home-catalogo.js?v=20261027"></script>
+    <script src="assets/js/dom.js?v=20261027bb"></script>
+    <script src="assets/js/i18n.js?v=20261027bb"></script>
+    <script src="assets/js/cart.js?v=20261027bb"></script>
+    <script src="assets/js/checkout.js?v=20261027bb"></script>
+    <script src="assets/js/home-catalogo.js?v=20261027bb"></script>
   </body>
 </html>
