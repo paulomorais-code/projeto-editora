@@ -18,7 +18,7 @@
   function card(product) {
     const cover =
       product.coverKind === "image"
-        ? `<img class="cover-photo" src="${apiBase}/products/${encodeURIComponent(product.slug)}/cover" alt="Capa: ${window.escapeHtml(product.title)}">`
+        ? `<img class="cover-photo" src="${apiBase}/products/${encodeURIComponent(product.slug)}/cover?v=${window.escapeHtml(String(product.coverV ?? ""))}" alt="Capa: ${window.escapeHtml(product.title)}">`
         : `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
     const preco =
       product.promoPriceCents && product.promoPriceCents < product.priceCents

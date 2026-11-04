@@ -19,13 +19,18 @@ const productSelect = {
   weightGrams: true,
   stock: true,
   coverMime: true,
+  coverFile: true,
   createdAt: true,
 } as const;
 
-function paraVitrine(products: Array<Record<string, unknown>> & Array<{ coverMime: string | null }>) {
-  return products.map(({ coverMime, ...product }) => ({
+function paraVitrine(
+  products: Array<{ coverMime: string | null; coverFile: string | null } & Record<string, unknown>>,
+) {
+  return products.map(({ coverMime, coverFile, ...product }) => ({
     ...product,
     coverKind: coverMime === "application/pdf" ? "pdf" : coverMime ? "image" : null,
+    // Versão da capa (hash do arquivo): invalida o cache do navegador quando a capa muda.
+    coverV: coverFile ? (coverFile.split("-").pop()?.split(".")[0] ?? null) : null,
   }));
 }
 
