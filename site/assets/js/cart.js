@@ -145,7 +145,7 @@ document.querySelectorAll("[data-feed-dir]").forEach((botao) => {
   botao.addEventListener("click", () => {
     const trilha = document.querySelector("#catalogo-feed");
     if (!trilha) return;
-    trilha.scrollBy({ left: Number(botao.dataset.feedDir) * trilha.clientWidth * 0.8, behavior: "smooth" });
+    trilha.scrollBy({ left: Number(botao.dataset.feedDir) * trilha.clientWidth, behavior: "smooth" });
   });
 });
 

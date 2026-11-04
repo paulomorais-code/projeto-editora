@@ -283,3 +283,8 @@ footer{padding:50px 7%;background:#182d3b}
 .novidades-row .book-card{width:260px}
 .novidades-row .book-stage{height:320px}
 .novidades-row .book-cover{height:265px;width:185px}
+
+/* Painel do catálogo: exatamente 3 livros por visão (avança 3 por seta) */
+.catalog-section .feed-row .book-card{flex:0 0 calc((100% - 44px) / 3)}
+@media(max-width:800px){.catalog-section .feed-row .book-card{flex:0 0 calc((100% - 22px) / 2)}}
+@media(max-width:520px){.catalog-section .feed-row .book-card{flex:0 0 86%}}
