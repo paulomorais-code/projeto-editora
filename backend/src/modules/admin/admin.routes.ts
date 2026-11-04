@@ -125,7 +125,7 @@ export async function adminRoutes(app: FastifyInstance) {
       select: { id: true, coverFile: true },
     });
     if (!product) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
-    const saved = saveCover(product.id, buffer, product.coverFile);
+    const saved = await saveCover(product.id, buffer, product.coverFile);
     const updated = await prisma.product.update({
       where: { id: product.id },
       data: { coverFile: saved.file, coverMime: saved.mime },

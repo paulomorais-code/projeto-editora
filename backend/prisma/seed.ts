@@ -41,8 +41,33 @@ const products = [
     description: "Ensaios sobre os futuros dos países periféricos.",
     priceCents: 7200,
     weightGrams: 310,
-    stock: 0
-  }
+    stock: 0,
+  },
+  {
+    slug: "goiania-desgoianizacao-do-lucro-a-estagnacao",
+    title: "Goiânia: desgoianização do lucro à estagnação",
+    category: "Goiânia",
+    description:
+      "Ensaios sobre a economia de Goiânia e Goiás: a desgoianização do lucro como produto da desnacionalização da economia, a verticalização e concentração dos processos econômicos e seus efeitos sobre goianos e goianas — da fundação da capital em 1933 às grandes mudanças constatadas em 2023.",
+    context:
+      "Texto elaborado a partir do livro MEMÓRIAS de Pedro Ludovico (pág. 79), ligando a história da fundação de Goiânia ao diagnóstico econômico do presente.",
+    priceCents: 4900,
+    year: 2023,
+    weightGrams: 300,
+    stock: 5,
+  },
+  {
+    slug: "cadernos-do-mundo-2024-numero-1",
+    title: "Cadernos do Mundo 2024 — Número 1",
+    category: "Mundo",
+    description:
+      "Primeiro número dos Cadernos do Mundo: por que o preço do urânio do Níger saltou de € 0,80/kg para € 200/kg — recursos naturais, poder e a perspectiva dos países periféricos.",
+    context: "Série Cadernos do Mundo: observação, hipótese e disputa sobre os futuros possíveis vistos das periferias.",
+    priceCents: 3990,
+    year: 2024,
+    weightGrams: 280,
+    stock: 5,
+  },
 ];
 
 for (const product of products) {
