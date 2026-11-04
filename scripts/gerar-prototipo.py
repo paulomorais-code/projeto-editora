@@ -30,7 +30,7 @@ PAGINAS = [
     "pagamento/pendente/index.html",
 ]
 
-MOCK_CONFIG = """// PROTOTÓTIPO: aponta o front para a API simulada e simula checkout/pedidos.
+MOCK_CONFIG = """// PROTOTÓTIPO: aponta o front para a API simulada (arquivos em /api-mock) e simula checkout.
 window.NASCENTE_API_URL = "api-mock";
 (function () {
   const fetchReal = window.fetch.bind(window);
@@ -51,21 +51,27 @@ window.NASCENTE_API_URL = "api-mock";
     ],
   };
   window.fetch = async (input, init) => {
-    const url = String(input instanceof Request ? input.url : input);
+    const urlSemQuery = String(input instanceof Request ? input.url : input).split("?")[0];
     const metodo = (init?.method || "GET").toUpperCase();
-    if (url.includes("/orders") && metodo === "POST") {
+    if (urlSemQuery.includes("/orders") && metodo === "POST") {
       return json({ order: { ...DEMO, accessToken: "token-de-demostracao" } }, 201);
     }
-    if (url.includes("/orders/") && metodo === "GET") {
+    if (urlSemQuery.includes("/orders/") && metodo === "GET") {
       return json({ order: DEMO });
     }
-    if (url.includes("payment-preference")) {
+    if (urlSemQuery.includes("payment-preference")) {
       return json({ error: "Protótipo — pagamento não disponível nesta demonstração." }, 503);
     }
-    if (url.includes("/catalog/pdf")) {
+    if (urlSemQuery.includes("/catalog/pdf")) {
       if (metodo === "HEAD") return new Response(null, { status: 200 });
-      const pdf = await fetchReal("api-mock/catalogo-corrente.pdf");
+      const pdf = await fetchReal("/api-mock/catalogo-corrente.pdf");
       return new Response(await pdf.arrayBuffer(), { status: 200, headers: { "content-type": "application/pdf" } });
+    }
+    if (urlSemQuery.includes("/products/mais-vendidos")) {
+      return json(await (await fetchReal("/api-mock/data/mais-vendidos.json")).json());
+    }
+    if (urlSemQuery.endsWith("/products")) {
+      return json(await (await fetchReal("/api-mock/data/products.json")).json());
     }
     return fetchReal(input, init);
   };
@@ -89,6 +95,7 @@ def principal():
     mais_vendidos = buscar("/products/mais-vendidos")["products"]
     catalogo = {"products": produtos, "meta": {"page": 1, "pages": 1, "total": len(produtos)}}
     destaques = [p for p in produtos if p.get("featured")]
+
     if os.path.exists(DESTINO):
         shutil.rmtree(DESTINO)
     os.makedirs(DESTINO)
@@ -116,12 +123,12 @@ def principal():
     # 3) api-mock: dados reais do catálogo
     api = os.path.join(DESTINO, "api-mock")
     os.makedirs(api, exist_ok=True)
-    with open(os.path.join(api, "products.json"), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.join(api, "data"), exist_ok=True)
+    with open(os.path.join(api, "data", "products.json"), "w", encoding="utf-8") as f:
         json.dump({"products": produtos}, f, ensure_ascii=False, indent=1)
     with open(os.path.join(api, "catalog"), "w", encoding="utf-8") as f:
         json.dump(catalogo, f, ensure_ascii=False, indent=1)
-    os.makedirs(os.path.join(api, "products"), exist_ok=True)
-    with open(os.path.join(api, "products", "mais-vendidos"), "w", encoding="utf-8") as f:
+    with open(os.path.join(api, "data", "mais-vendidos.json"), "w", encoding="utf-8") as f:
         json.dump({"products": mais_vendidos}, f, ensure_ascii=False, indent=1)
     os.makedirs(os.path.join(api, "home"), exist_ok=True)
     with open(os.path.join(api, "home", "sections"), "w", encoding="utf-8") as f:
@@ -132,13 +139,13 @@ def principal():
             indent=1,
         )
 
-    # 4) capas reais
+    # 4) capas reais (arquivos estáticos servidos pelo próprio mock, por slug)
     for produto in produtos:
         if produto.get("coverKind"):
             baixar(f"/products/{produto['slug']}/cover", os.path.join(api, "products", produto["slug"], "cover"))
 
     # 5) catálogo corrente em PDF (publicado pelo editor)
-    if os.path.join(RAIZ, "backend", "uploads", "catalog", "catalogo.pdf") and buscar_pdf_publicado():
+    if buscar_pdf_publicado():
         baixar("/catalog/pdf", os.path.join(api, "catalogo-corrente.pdf"))
 
     total = sum(len(files) for _, _, files in os.walk(DESTINO))

@@ -1,4 +1,4 @@
-// PROTOTÓTIPO: aponta o front para a API simulada e simula checkout/pedidos.
+// PROTOTÓTIPO: aponta o front para a API simulada (arquivos em /api-mock) e simula checkout.
 window.NASCENTE_API_URL = "api-mock";
 (function () {
   const fetchReal = window.fetch.bind(window);
@@ -19,21 +19,27 @@ window.NASCENTE_API_URL = "api-mock";
     ],
   };
   window.fetch = async (input, init) => {
-    const url = String(input instanceof Request ? input.url : input);
+    const urlSemQuery = String(input instanceof Request ? input.url : input).split("?")[0];
     const metodo = (init?.method || "GET").toUpperCase();
-    if (url.includes("/orders") && metodo === "POST") {
+    if (urlSemQuery.includes("/orders") && metodo === "POST") {
       return json({ order: { ...DEMO, accessToken: "token-de-demostracao" } }, 201);
     }
-    if (url.includes("/orders/") && metodo === "GET") {
+    if (urlSemQuery.includes("/orders/") && metodo === "GET") {
       return json({ order: DEMO });
     }
-    if (url.includes("payment-preference")) {
+    if (urlSemQuery.includes("payment-preference")) {
       return json({ error: "Protótipo — pagamento não disponível nesta demonstração." }, 503);
     }
-    if (url.includes("/catalog/pdf")) {
+    if (urlSemQuery.includes("/catalog/pdf")) {
       if (metodo === "HEAD") return new Response(null, { status: 200 });
-      const pdf = await fetchReal("api-mock/catalogo-corrente.pdf");
+      const pdf = await fetchReal("/api-mock/catalogo-corrente.pdf");
       return new Response(await pdf.arrayBuffer(), { status: 200, headers: { "content-type": "application/pdf" } });
+    }
+    if (urlSemQuery.includes("/products/mais-vendidos")) {
+      return json(await (await fetchReal("/api-mock/data/mais-vendidos.json")).json());
+    }
+    if (urlSemQuery.endsWith("/products")) {
+      return json(await (await fetchReal("/api-mock/data/products.json")).json());
     }
     return fetchReal(input, init);
   };
