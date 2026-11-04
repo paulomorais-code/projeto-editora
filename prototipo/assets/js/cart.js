@@ -294,7 +294,7 @@ function openBook(title) {
   const modalCover = document.querySelector(".modal-cover");
   if (product.coverKind === "image" && product.coverV) {
     modalCover.className = "modal-cover has-photo";
-    modalCover.innerHTML = `<img class="cover-photo" src="${catalogApiUrl()}/products/${encodeURIComponent(product.slug)}/cover?v=${window.escapeHtml(product.coverV)}" alt="Capa: ${window.escapeHtml(product.title)}">`;
+    modalCover.innerHTML = `<img class="cover-photo" src="${apiBaseAtual || catalogApiUrl()}/products/${encodeURIComponent(product.slug)}/cover?v=${window.escapeHtml(product.coverV)}" alt="Capa: ${window.escapeHtml(product.title)}">`;
   } else {
     modalCover.className = `modal-cover ${product.color}`;
     modalCover.innerHTML = `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
