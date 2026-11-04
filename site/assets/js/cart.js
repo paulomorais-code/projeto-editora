@@ -140,12 +140,16 @@ function renderCatalog(apiBase) {
     .forEach((button) => button.addEventListener("click", () => addToCart(button.dataset.add)));
 }
 
-// Setas ‹ › do painel de feed (rola a trilha com suavidade)
+// Setas ‹ › do painel de feed: desliza fluido para o livro seguinte/anterior
+let feedIndice = 0;
 document.querySelectorAll("[data-feed-dir]").forEach((botao) => {
   botao.addEventListener("click", () => {
     const trilha = document.querySelector("#catalogo-feed");
-    if (!trilha) return;
-    trilha.scrollBy({ left: Number(botao.dataset.feedDir) * trilha.clientWidth, behavior: "smooth" });
+    const cards = trilha?.querySelectorAll(".book-card");
+    if (!trilha || !cards?.length) return;
+    feedIndice = Math.min(cards.length - 1, Math.max(0, feedIndice + Number(botao.dataset.feedDir)));
+    const base = cards[0].offsetLeft;
+    trilha.scrollTo({ left: cards[feedIndice].offsetLeft - base, behavior: "smooth" });
   });
 });
 

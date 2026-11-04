@@ -284,7 +284,10 @@ footer{padding:50px 7%;background:#182d3b}
 .novidades-row .book-stage{height:320px}
 .novidades-row .book-cover{height:265px;width:185px}
 
-/* Painel do catálogo: exatamente 3 livros por visão (avança 3 por seta) */
-.catalog-section .feed-row .book-card{flex:0 0 calc((100% - 44px) / 3)}
-@media(max-width:800px){.catalog-section .feed-row .book-card{flex:0 0 calc((100% - 22px) / 2)}}
-@media(max-width:520px){.catalog-section .feed-row .book-card{flex:0 0 86%}}
+/* Painel do catálogo: 1 livro por visão, deslize fluido com snap */
+.catalog-section .feed-row{scroll-snap-type:x mandatory;scroll-padding-left:6.5%}
+.catalog-section .feed-row .book-card{flex:0 0 min(460px, 88%);scroll-snap-align:start}
+.catalog-section .feed-row .book-stage{height:430px}
+.catalog-section .feed-row .book-cover{height:410px;width:300px}
+.catalog-section .feed-row .book-cover strong{font-size:22px;margin-top:64px}
+@media(max-width:640px){.catalog-section .feed-row .book-card{flex-basis:92%}.catalog-section .feed-row .book-stage{height:360px}.catalog-section .feed-row .book-cover{height:340px;width:250px}}
