@@ -291,7 +291,14 @@ function openBook(title) {
   document.querySelector("#modal-description").textContent = product.description;
   document.querySelector("#modal-price").textContent = formatPrice(product.price);
   document.querySelector("[data-modal-more]").href = `livro.html?livro=${product.slug}`;
-  document.querySelector(".modal-cover").className = `modal-cover ${product.color}`;
+  const modalCover = document.querySelector(".modal-cover");
+  if (product.coverKind === "image" && product.coverV) {
+    modalCover.className = "modal-cover has-photo";
+    modalCover.innerHTML = `<img class="cover-photo" src="${catalogApiUrl()}/products/${encodeURIComponent(product.slug)}/cover?v=${window.escapeHtml(product.coverV)}" alt="Capa: ${window.escapeHtml(product.title)}">`;
+  } else {
+    modalCover.className = `modal-cover ${product.color}`;
+    modalCover.innerHTML = `<small>NASCENTE / ${window.escapeHtml(product.category.toUpperCase())}</small><strong>${window.escapeHtml(product.title)}</strong><i></i><span>AUTOR ANÔNIMO</span>`;
+  }
   modal.classList.add("open");
   overlay.classList.add("visible");
   modal.setAttribute("aria-hidden", "false");
