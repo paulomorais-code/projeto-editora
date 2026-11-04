@@ -1,6 +1,6 @@
 const translations = {
   pt: {
-    nav: ["Início", "Catálogo", "Eventos", "Sobre"],
+    nav: ["Início", "Catálogo", "Catálogo completo", "Eventos", "Sobre"],
     heroEyebrow: "Editora & livraria independente",
     heroIntro: "Pensamento independente sobre poder, economia, sociedade e as ideias que moldam nosso tempo.",
     explore: "Explorar catálogo",
@@ -139,7 +139,7 @@ const translations = {
     orderRefresh: "Atualizar status",
   },
   fr: {
-    nav: ["Accueil", "Catalogue", "Événements", "À propos"],
+    nav: ["Accueil", "Catalogue", "Catalogue complet", "Événements", "À propos"],
     heroEyebrow: "Maison d’édition & librairie indépendante",
     heroIntro:
       "Une pensée indépendante sur le pouvoir, l’économie, la société et les idées qui façonnent notre époque.",
@@ -280,7 +280,7 @@ const translations = {
     orderRefresh: "Actualiser le statut",
   },
   es: {
-    nav: ["Inicio", "Catálogo", "Eventos", "Sobre nosotros"],
+    nav: ["Inicio", "Catálogo", "Catálogo completo", "Eventos", "Sobre nosotros"],
     heroEyebrow: "Editorial y librería independiente",
     heroIntro:
       "Pensamiento independiente sobre el poder, la economía, la sociedad y las ideas que moldean nuestro tiempo.",
